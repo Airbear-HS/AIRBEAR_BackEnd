@@ -1,0 +1,33 @@
+.back {
+  position: absolute;
+  position: relative;
+  display: inline-block;
+}
+
+.text_1 {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  margin-left: 20px; /* 예시로 20px로 수정 */
+  transform: translate(0, 0);
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+  width: 70%;
+  text-align: left;
+  line-height: 1.2; /* 줄 간격 조정 */
+  padding-bottom: 30px; /* 하단에 여백 추가 */
+}
+
+.introduce {
+  position: absolute;
+  margin-left: 100px;
+  font-family: 'Namugothic'; /* 따옴표로 감싸주세요 */
+  font-size: 30px; /* 단위가 누락되어 있습니다. px를 추가해주세요 */
+  font-weight: 700; /* 대소문자가 잘못되었습니다. */
+  text-align: left; /* 'left' 대신 left를 사용해주세요 */
+  color: #00d8ff; /* 따옴표를 제거해주세요 */
+}
+.back {
+  margin-bottom: 400px; /* 예시로 20px 추가 */
+}

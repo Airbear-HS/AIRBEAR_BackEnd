@@ -1,0 +1,106 @@
+.mountain {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.svg_mountain {
+  width: 150px;
+  height: 170px;
+  flex-shrink: 0;
+  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+  margin-left: 80px;
+}
+.mountain p {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.mountain_container {
+  margin-bottom: 50px;
+}
+
+.community {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.svg_community {
+  width: 120px;
+  height: 150px;
+  flex-shrink: 0;
+  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+  margin-left: 80px;
+}
+.community p {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: 80px;
+}
+
+.community_container {
+  margin-bottom: 100px;
+}
+
+.pencil {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.svg_pencil {
+  width: 120px;
+  height: 150px;
+  flex-shrink: 0;
+  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+  margin-left: 80px;
+}
+.pencil p {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: 95px;
+}
+
+.pencil_container {
+  margin-bottom: 50px;
+}
+
+.idea {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.svg_idea {
+  width: 100px;
+  height: 130px;
+  flex-shrink: 0;
+  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+  margin-left: 80px;
+}
+.idea p {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: 80px;
+}
+
+.idea_container {
+  margin-bottom: 100px;
+}

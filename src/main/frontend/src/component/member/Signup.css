@@ -1,0 +1,83 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 1500px;
+  height: 400px;
+  border-radius: 20px;
+  border: 3px solid #fffff;
+  background: #fffff;
+  margin-left: 10px;
+}
+
+.text,
+.password {
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.signup-input {
+  width: 238px;
+  height: 37px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 3px solid #00d8ff;
+  background: #fff;
+  margin-right: 5px;
+  margin-bottom: 30px;
+}
+
+.signup-input::placeholder {
+  color: #00d8ff; /* 원하는 색상으로 변경하세요 */
+}
+
+.signup-button_real {
+  width: 75px;
+  height: 37px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #00d8ff;
+  border: 3px solid #00d8ff;
+}
+
+.signup-button_real {
+  color: #fff;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.under_signup {
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+}
+.under_signup p {
+  color: #00d8ff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.signup-button_real:hover {
+  background-color: #0056b3;
+}
+
+.signup-button_real:hover,
+.signup-input:hover {
+  background-color: #00d8ff;
+}

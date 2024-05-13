@@ -1,0 +1,55 @@
+/* 부모 요소에 대한 스타일 */
+.parent_container,
+.parent_container_2,
+.parent_container_3,
+.parent_container_4,
+.parent_container_5,
+.parent_container_6 {
+  display: flex;
+  margin-left: 150px;
+  margin-bottom: 45px;
+}
+
+.first_bear {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00d8ff;
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+.first_bear_text {
+  text-align: left;
+  flex: 1;
+  color: #000f75;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.first_bear_svg {
+  fill: #fff; /* 이 부분은 SVG의 실제 색상 코드로 교체해야 할 수 있습니다 */
+  width: 70px;
+  height: 70px;
+  margin-right: 50px;
+}
+
+.number_bear {
+  width: 94.349px;
+  height: 50.099px;
+
+  flex-shrink: 0;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+}

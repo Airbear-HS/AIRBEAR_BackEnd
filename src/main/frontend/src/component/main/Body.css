@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: row; /* 가로 방향 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  width: 97%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 99px;
+  border: 2px solid #00d8ff;
+  margin-bottom: 200px;
+}
+
+.polarbear {
+  flex: 0 0 auto; /* 변하지 않는 크기 유지 */
+  margin-right: 20px; /* 오른쪽 아이템과의 간격 */
+}
+
+.items {
+  flex: 1; /* 남은 공간을 모두 차지 */
+  display: flex;
+  flex-direction: column; /* 아이템들을 세로로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px; /* 마지막 아이템을 제외한 간격 */
+}
+
+.item img {
+  width: 50px; /* 아이콘 크기 */
+}
+
+.item p {
+  font-size: 20px;
+  color: #00d8ff;
+  font-weight: 100;
+  text-align: left;
+}

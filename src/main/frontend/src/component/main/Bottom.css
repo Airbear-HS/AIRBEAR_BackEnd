@@ -1,0 +1,40 @@
+.mobile {
+  position: relative;
+  text-align: left;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  background-size: cover;
+  left: 300;
+  margin-bottom: 200px;
+}
+
+.mob {
+  color: #ffffff;
+  align-items: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
+  justify-content: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: absolute; /* 텍스트를 절대적으로 배치 */
+  top: 5%; /* 부모 요소의 상단에 배치 */
+  left: 2%; /* 부모 요소의 왼쪽에 배치 */
+  transform: translate(0, 0); /* 텍스트를 원래 위치로 이동하지 않도록 함 */
+}
+
+.mob_2 {
+  color: #00d8ff;
+  align-items: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
+  justify-content: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: absolute; /* 텍스트를 절대적으로 배치 */
+  top: 70%;
+  left: 2%; /* 부모 요소의 왼쪽에 배치 */
+  transform: translate(0, 0); /* 텍스트를 원래 위치로 이동하지 않도록 함 */
+}
