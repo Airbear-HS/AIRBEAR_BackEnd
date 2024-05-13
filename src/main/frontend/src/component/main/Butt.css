@@ -1,3 +1,70 @@
-.tips {
-  margin-bottom: 50px;
+.tips_1,
+.tips_2,
+.tips_3 {
+  display: flex;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none; /* 모든 a 태그의 밑줄을 제거 */
+  color: inherit; /* 링크 색상을 상속받도록 설정 */
+}
+
+/* 위의 스타일을 각 .tips_1, .tips_2, .tips_3 안의 a 태그에도 적용하기 위해 추가 */
+.tips_1 a,
+.tips_2 a,
+.tips_3 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.first_tip_text {
+  text-align: left;
+  flex: 1;
+  color: #000f75;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.first_tip {
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bcebf3;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+  text-decoration: none;
+}
+
+.second_tip {
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #9bf2ff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+.third_tip {
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #63d3e4;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
 }

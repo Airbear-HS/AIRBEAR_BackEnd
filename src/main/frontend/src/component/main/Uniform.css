@@ -1,0 +1,76 @@
+.Uniform_title {
+  text-align: center;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal; /* 125% */
+  white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+  margin-bottom: 30px;
+}
+
+.spring_warm_container,
+.summer_cool_container,
+.fall_warm_container,
+.winter_cool_container,
+.spring_warm,
+.summer_cool,
+.fall_warm,
+.winter_cool {
+  display: flex;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.spring_warm {
+  width: 1400px;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffcfcf;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+.summer_cool {
+  width: 1400px;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c0d8ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+.fall_warm {
+  width: 1400px;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e6a860;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+.winter_cool {
+  width: 1400px;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff00ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
