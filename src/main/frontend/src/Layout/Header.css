@@ -4,6 +4,11 @@
   padding: 10px 20px;
   background-color: #ffffff;
 }
+.profile-button {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+}
 
 .login-button,
 .signup-button,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Nav_Layout from './Nav_Layout';
-import Ordinary from './Ordinary';
+
 import Cabin from './Cabin';
 import Papago from './Papago';
 import Intern from './Intern';
@@ -41,9 +41,6 @@ function Recruiting() {
         <nav className="recruit_nav">
           <ul className="recruit_nav-links">
             <li>
-              <Link to="/ordinary">객실 승무원</Link>
-            </li>
-            <li>
               <Link to="/cabin">캐빈 승무원</Link>
             </li>
             <li>
@@ -56,7 +53,6 @@ function Recruiting() {
         </nav>
         {/* Route 설정을 nav 바로 아래에 배치하여 선택된 링크에 따라 컨텐츠가 변경되도록 합니다. */}
         <Routes>
-          <Route path="/ordinary" element={<Ordinary />} />
           <Route path="/cabin" element={<Cabin />} />
           <Route path="/papago" element={<Papago />} />
           <Route path="/intern" element={<Intern />} />

@@ -36,34 +36,34 @@ function App() {
   };
 
   return (
-      <div>
-        <AppLayout>
-          <Routes>
-            <Route path="/service" element={<Service />} />
-            <Route path="/process" element={<Process />} />
-            <Route path="/techniques" element={<Techniques />} />
-            <Route path="/interview" element={<Interview />} />
-            <Route path="/recruiting" element={<Recruiting />} />
-            <Route path="/test" element={<Test />} />
-            <Route path="/" element={<Home />} />
-            {/* 로그인 상태에 따라 Login_Success 또는 Login_Fail 페이지를 보여줌 */}
-            {loggedIn ? (
-                <Route path="/login" element={<Login_Success />} />
-            ) : (
-                <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            )}
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/Login_Fail" element={<Login_Fail />} />
-            <Route path="/Uniform" element={<Uniform />} />
-            <Route path="/Advice" element={<Advice />} />
-            <Route path="/Health" element={<Health />} />
-            <Route path="/Ordinary" element={<Ordinary />} />
-            <Route path="/Papago" element={<Papago />} />
-            <Route path="/Cabin" element={<Cabin />} />
-            <Route path="/Intern" element={<Intern />} />
-          </Routes>
-        </AppLayout>
-      </div>
+    <div>
+      <AppLayout>
+        <Routes>
+          <Route path="/service" element={<Service />} />
+          <Route path="/process" element={<Process />} />
+          <Route path="/techniques" element={<Techniques />} />
+          <Route path="/interview" element={<Interview />} />
+          <Route path="/recruiting" element={<Recruiting />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/" element={<Home />} />
+          {/* 로그인 상태에 따라 Login_Success 또는 Login_Fail 페이지를 보여줌 */}
+          {loggedIn ? (
+            <Route path="/login" element={<Login_Success />} />
+          ) : (
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          )}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/Login_Fail" element={<Login_Fail />} />
+          <Route path="/Uniform" element={<Uniform />} />
+          <Route path="/Advice" element={<Advice />} />
+          <Route path="/Health" element={<Health />} />
+          <Route path="/Ordinary" element={<Ordinary />} />
+          <Route path="/Papago" element={<Papago />} />
+          <Route path="/Cabin" element={<Cabin />} />
+          <Route path="/Intern" element={<Intern />} />
+        </Routes>
+      </AppLayout>
+    </div>
   );
 }
 

@@ -26,11 +26,14 @@
   white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
 }
 
+.recruit_posting {
+}
+
 .recruit_nav {
   display: flex;
-  margin-left: 330px;
+  margin-left: 500px;
   align-items: center;
-  width: 780px;
+  width: 600px;
   height: 30px;
   border-radius: 30px;
   background-color: #ffffff; /* 배경색 */

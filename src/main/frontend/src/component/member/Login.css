@@ -61,7 +61,7 @@
 }
 
 svg {
-  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
+  margin-right: 30px; /* svg와 p 사이의 간격 조절 */
 }
 .under p {
   color: #00d8ff;
