@@ -1,0 +1,41 @@
+.Personal-container {
+  display: flex;
+  margin-left: 200px;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 1200px;
+  height: 700px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  border: 8px solid #00d8ff;
+  background: #fff;
+  margin-bottom: 50px;
+  position: relative; /* 부모 요소로 설정 */
+}
+
+.questions {
+  position: absolute; /* 절대 위치로 설정 */
+  top: 0; /* 부모 요소의 위쪽으로 배치 */
+  left: 50%; /* 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데 정렬을 위한 변형 */
+  display: flex; /* Flexbox 설정 */
+  align-items: center; /* 수직 가운데 정렬 */
+}
+
+.questions h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #000;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-right: 2px; /* h2 요소와 svg 사이의 간격 설정 */
+  white-space: nowrap;
+}
+
+.questions svg {
+  margin-top: 35px;
+  align-self: flex-start; /* h2 요소의 왼쪽에 배치 */
+}

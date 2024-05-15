@@ -12,7 +12,7 @@ function Login() {
       const response = await axios.post('http://localhost:8080/api/login', { userId, password });
       if (response.data.startsWith("로그인 성공")) {
         const userId = response.data.split(": ")[1];
-        localStorage.setItem("userId", userId); // 사용자 ID를 로컬 스토리지에 저장
+        localStorage.setItem("userId", userId);// 사용자 ID를 로컬 스토리지에 저장
         window.location.href = '/'; // 홈으로 리디렉션
       } else {
         alert(response.data);
