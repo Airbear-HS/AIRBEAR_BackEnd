@@ -3,7 +3,7 @@ import './Body.css'; // CSS 파일 불러오기
 
 function Body() {
   return (
-    <div className="container">
+    <div className="body_container">
       <div className="polarbear">
         <svg
           width={500}

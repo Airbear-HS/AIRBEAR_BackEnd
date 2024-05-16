@@ -4,13 +4,26 @@ import './Interview_Real.css';
 const Interview_Real = () => {
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [question, setQuestion] = useState('');
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     const storedQuestion = JSON.parse(localStorage.getItem('question'));
     if (storedQuestion) {
       setQuestion(storedQuestion.question);
+      fetchAnswers(storedQuestion.questionId);
     }
   }, []);
+
+  const fetchAnswers = async (questionId) => {
+    try {
+      const response = await fetch(`/api/answers/${questionId}`);
+      const data = await response.json();
+      localStorage.setItem('best_answer', JSON.stringify(data));
+      setAnswers(data);
+    } catch (error) {
+      console.error('Error fetching answers:', error);
+    }
+  };
 
   const toggleTextVisibility = () => {
     setIsTextVisible(!isTextVisible);
@@ -51,27 +64,24 @@ const Interview_Real = () => {
 
           {/* 텍스트가 보이면 표시되는 부분 */}
           {isTextVisible && (
-              <p
-                  style={{
-                    color: '#000',
-                    fontFamily: 'Inter',
-                    fontSize: '20px',
-                    fontStyle: 'normal',
-                    fontWeight: 800,
-                    lineHeight: 'normal',
-                  }}
-              >
-                1. 제 전공은 영문학이고, 부전공은 관광경영학입니다.
-                <br />
-                2. 저는 화학 전공으로 올해 학사학위를 취득할 예정입니다.
-                <br />
-                3. 저는 디자인과 경영학 복수 전공으로 학사 학위를 가지고 있습니다.
-                <br />
-                4. 저는 2016년에 aa대학교에서 관광학 학사 학위를 취득했습니다.
-                <br />
-                5. 저는 항상 서비스 산업에서 일하기를 원했기 때문에 호텔경영학을
-                전공했습니다.
-              </p>
+              <div>
+                {answers.map((answer, index) => (
+                    <p
+                        key={index}
+                        style={{
+                          color: '#000',
+                          fontFamily: 'Inter',
+                          fontSize: '20px',
+                          fontStyle: 'normal',
+                          fontWeight: 800,
+                          lineHeight: 'normal',
+                        }}
+                    >
+                      {index + 1}. {answer.best_answer}
+                      <br />
+                    </p>
+                ))}
+              </div>
           )}
         </div>
       </div>

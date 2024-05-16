@@ -62,3 +62,31 @@
 .recruit_nav-links a:hover {
   color: #0056b3; /* 호버시 색상 변경 */
 }
+
+.recruitment-table {
+  width: 1500px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 5px;
+  border: 2px solid #0056b3;
+  background: #fff;
+  margin-left: 80px;
+  margin-bottom: 50px;
+}
+
+.recruitment-table th,
+.recruitment-table td {
+  border: 1px solid #0056b3;
+  padding: 8px;
+  text-align: center;
+  color: #00244b;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.recruitment-table th {
+  background-color: #00d8ff;
+}

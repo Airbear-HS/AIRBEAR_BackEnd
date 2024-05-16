@@ -64,13 +64,16 @@
 }
 
 .recruitment-table {
-  width: 1500px;
+  align-items: center;
+  width: 100%; /* 너비를 화면에 맞게 조절 */
+  max-width: 1200px; /* 최대 너비 설정 */
+  min-width: 300px; /* 최소 너비 설정, 필요에 따라 조정 가능 */
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: 5px;
   border: 2px solid #0056b3;
   background: #fff;
-  margin-left: 80px;
+  margin-left: 300px;
   margin-bottom: 50px;
 }
 

@@ -11,9 +11,7 @@ public class Answer {
     private Integer questionId;
     private String best_answer;
 
-    public Answer(){
-
-    }
+    public Answer() {}
 
     public Answer(Integer questionId, String best_answer) {
         this.questionId = questionId;
@@ -22,7 +20,7 @@ public class Answer {
 
     public Integer getQuestionId() { return questionId; }
 
-    public void setQuestionId(Integer questionId) { this.questionId = questionId;  }
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 
     public String getBest_answer() { return best_answer; }
 

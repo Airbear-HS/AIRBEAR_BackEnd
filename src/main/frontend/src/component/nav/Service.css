@@ -1,106 +1,83 @@
-.mountain {
+.servicebody {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 5px;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
-.svg_mountain {
-  width: 150px;
-  height: 170px;
-  flex-shrink: 0;
-  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
-  margin-left: 80px;
-}
-.mountain p {
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
+.highlight {
+  color: #0056b3;
 }
 
-.mountain_container {
-  margin-bottom: 50px;
-}
-
-.community {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.svg_community {
-  width: 120px;
-  height: 150px;
-  flex-shrink: 0;
-  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
-  margin-left: 80px;
-}
-.community p {
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-  margin-left: 80px;
-}
-
-.community_container {
-  margin-bottom: 100px;
-}
-
-.pencil {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.svg_pencil {
-  width: 120px;
-  height: 150px;
-  flex-shrink: 0;
-  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
-  margin-left: 80px;
-}
-.pencil p {
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-  margin-left: 95px;
-}
-
-.pencil_container {
-  margin-bottom: 50px;
-}
-
+.mountain,
+.community,
+.pencil,
 .idea {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
 }
 
-.svg_idea {
-  width: 100px;
-  height: 130px;
-  flex-shrink: 0;
-  margin-right: 10px; /* svg와 p 사이의 간격 조절 */
-  margin-left: 80px;
-}
+.mountain p,
+.community p,
+.pencil p,
 .idea p {
   color: #00d8ff;
-  font-family: Inter;
-  font-size: 30px;
+  font-family: Inter, sans-serif;
+  font-size: 2vw; /* 반응형 폰트 크기 */
   font-style: normal;
   font-weight: 800;
   line-height: normal;
-  margin-left: 80px;
+  margin: 0; /* margin-left 제거 */
+  white-space: nowrap;
 }
 
+.mountain img,
+.community img,
+.pencil img,
+.idea img {
+  width: 80vw; /* 반응형 이미지 크기 */
+  max-width: 600px; /* 최대 너비 설정 */
+  height: auto; /* 높이를 자동으로 조정 */
+  flex-shrink: 0;
+  border-radius: 30px;
+  margin-top: 20px;
+}
+
+.mountain_container,
+.community_container,
+.pencil_container,
 .idea_container {
-  margin-bottom: 100px;
+  margin-bottom: 5vw; /* 반응형 마진 */
+  max-width: 800px; /* 최대 너비 설정 */
+  width: 90vw; /* 반응형 너비 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .mountain p,
+  .community p,
+  .pencil p,
+  .idea p {
+    font-size: 30px; /* 더 큰 화면에서는 고정된 폰트 크기 사용 */
+  }
+
+  .mountain img,
+  .community img,
+  .pencil img,
+  .idea img {
+    width: 600px; /* 더 큰 화면에서는 고정된 이미지 크기 사용 */
+  }
+
+  .mountain_container,
+  .community_container,
+  .pencil_container,
+  .idea_container {
+    margin-bottom: 120px; /* 더 큰 화면에서는 고정된 마진 사용 */
+  }
 }

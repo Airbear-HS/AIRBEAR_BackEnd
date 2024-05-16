@@ -2,17 +2,14 @@
   position: relative;
   text-align: left;
   display: flex;
-  align-items: left;
-  justify-content: left;
+  align-items: center; /* 수직 정렬을 중앙으로 변경 */
+  justify-content: flex-start; /* 수평 정렬을 왼쪽으로 설정 */
   background-size: cover;
-  left: 300;
   margin-bottom: 70px;
 }
 
 .mob {
   color: #ffffff;
-  align-items: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
-  justify-content: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
   font-family: Inter;
   font-size: 40px;
   font-style: normal;
@@ -26,8 +23,6 @@
 
 .mob_2 {
   color: #00d8ff;
-  align-items: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
-  justify-content: left; /* 이 속성은 flex 컨테이너에 대한 것입니다. */
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
@@ -37,4 +32,17 @@
   top: 70%;
   left: 2%; /* 부모 요소의 왼쪽에 배치 */
   transform: translate(0, 0); /* 텍스트를 원래 위치로 이동하지 않도록 함 */
+}
+
+.rectangle {
+  width: 600px; /* 사각형의 너비 */
+  height: 500px; /* 사각형의 높이 */
+  background-color: #ffffff; /* 사각형의 배경색 */
+  border: 3px solid #00d8ff; /* 사각형의 테두리 */
+  border-radius: 20px; /* 사각형의 모서리 둥글게 */
+  margin-left: 50px; /* 왼쪽 아이템과의 간격 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

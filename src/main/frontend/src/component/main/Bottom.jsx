@@ -1,5 +1,6 @@
 import React from 'react';
 import './Bottom.css';
+import FortuneCookie from '../tune/FortuneCookie';
 
 function Bottom() {
   return (
@@ -29,6 +30,10 @@ function Bottom() {
           승무원의 꿈에
           <br />
           가까워지세요
+        </div>
+
+        <div className="rectangle">
+          <FortuneCookie />
         </div>
       </div>
     </div>

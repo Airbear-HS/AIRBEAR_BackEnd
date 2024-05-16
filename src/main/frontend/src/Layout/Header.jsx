@@ -15,7 +15,7 @@ function Header() {
 
   const handleLogout = () => {
     // 로그아웃 버튼 클릭 시 로컬 스토리지에서 userId 삭제
-    localStorage.removeItem('userId');
+    localStorage.clear();
     setIsLoggedIn(false);
     window.location.reload();
     window.location.href = '/';

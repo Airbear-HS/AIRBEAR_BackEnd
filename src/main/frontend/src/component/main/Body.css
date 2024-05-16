@@ -1,12 +1,12 @@
-.container {
+.body_container {
   display: flex;
   flex-direction: row; /* 가로 방향 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  width: 97%;
+  width: 1300px;
   padding: 20px;
 
   border-radius: 99px;
-  border: 2px solid #00d8ff;
+  border: 3px solid #00d8ff;
   margin-bottom: 200px;
   background-color: #fff;
 }
@@ -38,6 +38,6 @@
 .item p {
   font-size: 20px;
   color: #00d8ff;
-  font-weight: 100;
+  font-weight: 700;
   text-align: left;
 }
