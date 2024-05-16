@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Interview_Real.css';
 
 const Interview_Real = () => {
   const [isTextVisible, setIsTextVisible] = useState(false);
+  const [question, setQuestion] = useState('');
+
+  useEffect(() => {
+    const storedQuestion = JSON.parse(localStorage.getItem('question'));
+    if (storedQuestion) {
+      setQuestion(storedQuestion.question);
+    }
+  }, []);
 
   const toggleTextVisibility = () => {
     setIsTextVisible(!isTextVisible);
@@ -24,7 +32,7 @@ const Interview_Real = () => {
                   fill="#00D8FF"
               />
             </svg>
-            <h2>Could you please tell me about your major?</h2>
+            <h2>{question}</h2>
           </div>
           <div className="answer-button" onClick={toggleTextVisibility}>
             <svg
