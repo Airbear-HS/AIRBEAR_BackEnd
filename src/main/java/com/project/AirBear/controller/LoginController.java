@@ -16,12 +16,15 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginRequest) {
-        User user = userService.validateUser(loginRequest.getUserId(), loginRequest.getPassword());
-        if (user != null) {
-            // 로그인 성공 시 사용자 ID를 포함하는 응답 반환
-            return ResponseEntity.ok("로그인 성공: " + user.getUserId());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
+        try {
+            User user = userService.validateUser(loginRequest.getUserId(), loginRequest.getPassword());
+            if (user != null) {
+                return ResponseEntity.ok("로그인 성공: " + user.getUserId());
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패: 사용자 정보가 올바르지 않습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류");
         }
     }
 }
