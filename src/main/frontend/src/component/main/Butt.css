@@ -2,7 +2,7 @@
 .tips_2,
 .tips_3 {
   display: flex;
-  margin-left: 5px;
+  margin-left: 0px;
   margin-bottom: 20px;
   text-decoration: none;
 }
@@ -33,7 +33,7 @@ a {
 }
 
 .first_tip {
-  width: 550px;
+  width: 1150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,7 +46,7 @@ a {
 }
 
 .second_tip {
-  width: 550px;
+  width: 1150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,7 +58,7 @@ a {
 }
 
 .third_tip {
-  width: 550px;
+  width: 1150px;
   display: flex;
   justify-content: space-between;
   align-items: center;

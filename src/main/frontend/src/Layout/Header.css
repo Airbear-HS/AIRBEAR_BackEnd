@@ -1,9 +1,17 @@
+.headerbody {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 상단 바 */
 .top-bar {
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
+
 .mypage-button {
   width: 35px;
   height: 35px;
@@ -20,29 +28,32 @@
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 22;
-  font-weight: 700;
-  text-align: left;
-  text-decoration: none; /* 밑줄 제거 */
+  font-size: 15px; /* 폰트 크기 단위 추가 */
+  font-weight: 600;
+  text-align: center; /* 가운데 정렬 */
+  text-decoration: none;
 }
 
 .login-button:hover,
 .signup-button:hover,
-logout-button:hover {
+.logout-button:hover {
   background-color: #0056b3;
 }
 
+/* 헤더 내용 */
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: -7px; /* 로고 이미지와 텍스트 사이의 간격을 0으로 설정 */
+  gap: 10px; /* 로고 이미지와 텍스트 사이의 간격을 10px로 설정 */
   margin-left: 10px;
 }
 
@@ -52,38 +63,48 @@ logout-button:hover {
   color: #00d8ff;
   font-style: normal;
   line-height: normal;
-  margin-left: -50px; /* 로고와 p 사이의 간격을 0으로 조정 */
+  margin-right: 30px; /* margin 제거 */
 }
 
 .logo img {
-  width: 100px; /* 로고의 너비 자동 설정 */
+  width: 100px;
   height: auto;
 }
 
+/* 내비게이션 */
 .navigation {
   display: flex;
   align-items: center;
-  width: 1100px;
-  height: 40px;
+  justify-content: center;
+  width: 100%; /* 가로 너비를 100%로 설정 */
+  max-width: 1200px; /* 최대 너비 설정 */
+  height: 60px; /* 높이 설정 */
   border-radius: 30px;
-  background-color: #ffffff; /* 배경색 */
-  padding: 20px; /* 내부 여백 */
-  border: 3px solid #00d8ff; /* 테두리 */
+  background-color: #ffffff;
+  padding: 10px 20px; /* 내부 여백 */
+  border: 3px solid #00d8ff;
+  box-sizing: border-box;
+  margin: 0 auto; /* 중앙 정렬 */
+  overflow: auto; /* 내용이 넘칠 때 스크롤 가능하게 설정 */
 }
-.nav-links {
-  list-style: none; /* 목록 스타일 없앰 */
 
+.nav-links {
+  list-style: none;
   margin: 0;
   padding: 0;
-  display: flex; /* 가로 배치 */
+  display: flex;
+  justify-content: space-around; /* 공간을 균등하게 배분 */
+  width: 100%;
+  white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
 }
+
 .nav-links li {
-  padding: 0 42px; /* 좌우 여백 */
+  padding: 0 20px;
 }
 
 .nav-links a {
   color: #00d8ff;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 800;
@@ -92,5 +113,29 @@ logout-button:hover {
 }
 
 .nav-links a:hover {
-  color: #0056b3; /* 호버시 색상 변경 */
+  color: #0056b3;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: row; /* 수평 레이아웃 유지 */
+    flex-wrap: nowrap; /* 줄 바꿈 방지 */
+    justify-content: center; /* 항목을 중앙 정렬 */
+    overflow-x: auto; /* 수평 스크롤 활성화 */
+  }
+
+  .nav-links li {
+    padding: 10px 10px; /* 간격 조정 */
+  }
 }

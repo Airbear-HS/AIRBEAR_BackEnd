@@ -1,0 +1,136 @@
+.page_mine {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.mine_header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.mine_header h1 {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: 15px;
+}
+
+.logo_mypage {
+  display: flex;
+  align-items: center;
+  margin-left: 90px;
+  margin-bottom: 30px;
+}
+
+.logo_mypage svg {
+  width: 90px; /* 로고 크기 조절 */
+  height: 90px; /* 비율을 유지하며 높이를 자동으로 설정 */
+  margin-right: 10px; /* 텍스트와 로고 사이 간격 조절 */
+}
+
+.logo_mypage span {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.cards-container {
+  display: flex; /* Flexbox를 활용하여 자식 요소들을 수평으로 배치 */
+  justify-content: space-between; /* 요소들 사이에 공간을 균등하게 배분 */
+  align-items: flex-start; /* 요소들을 컨테이너의 시작점에 맞춤 */
+}
+
+.hi-card,
+.date-card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.date-card {
+  width: 500px;
+  height: 820px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 3px solid rgba(0, 216, 255, 0.66);
+  background: #fff;
+}
+
+.profile-image {
+  width: 200px;
+  height: 210px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.hi-card svg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.cards-container h2 {
+  color: #000;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.cards-container p {
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.greeting_mine p {
+  color: #00a8ff;
+  margin-bottom: 10px;
+}
+
+.extra-space_api {
+  height: 200px; /* 추가적인 공간을 확보 */
+}
+
+.mypage_intro {
+  margin-left: 20px;
+}
+.mypage_intro h2 {
+  margin-right: 350px;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  white-space: nowrap;
+}
+.mypage_intro p {
+  margin-right: 350px;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.facebear {
+  margin-top: 1px;
+  margin-right: 400px;
+}

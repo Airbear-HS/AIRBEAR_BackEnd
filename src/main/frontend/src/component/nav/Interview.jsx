@@ -2,24 +2,30 @@ import React from 'react';
 import './Interview.css'; // CSS 파일을 가져옴
 import { Link, useNavigate } from 'react-router-dom';
 
-const Card = ({ hashtags, questionId }) => {
+const Card = ({ questionIds, hashtags }) => {
   const navigate = useNavigate();
 
-  const handleLinkClick = async () => {
+  const handleLinkClick = async (questionIds) => {
     try {
-      const response = await fetch(`http://localhost:8080/interview/${questionId}`);
+      const response = await fetch(`http://localhost:8080/interview`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ questionIds })
+      });
       const data = await response.json();
-      localStorage.setItem('question', JSON.stringify(data));
+      localStorage.setItem('questions', JSON.stringify(data));
       navigate('/Interview_Real');
     } catch (error) {
-      console.error('Error fetching question:', error);
+      console.error('Error fetching questions:', error);
     }
   };
 
   return (
       <div className="card">
         {hashtags.map((tag, index) => (
-            <div key={index} className="tag" onClick={handleLinkClick}>
+            <div key={index} className="tag" onClick={() => handleLinkClick(questionIds)}>
               {tag}
             </div>
         ))}
@@ -30,7 +36,7 @@ const Card = ({ hashtags, questionId }) => {
 const Interview = () => {
   const data = [
     {
-      questionId: 101,
+      questionIds: [101, 102, 201],
       hashtags: [
         <p>Personal Background</p>,
         <span>#성격 및 개인적인 경험</span>,
@@ -102,7 +108,7 @@ const Interview = () => {
   return (
       <div className="container">
         {data.map((card, index) => (
-            <Card key={index} questionId={card.questionId} hashtags={card.hashtags}/>
+            <Card key={index} questionIds={card.questionIds} hashtags={card.hashtags}/>
         ))}
       </div>
   );

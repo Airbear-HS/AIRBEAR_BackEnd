@@ -4,21 +4,39 @@ import './Interview_Real.css';
 const Interview_Real = () => {
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [question, setQuestion] = useState('');
+  const [questionId, setQuestionId] = useState('');
   const [answers, setAnswers] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   useEffect(() => {
-    const storedQuestion = JSON.parse(localStorage.getItem('question'));
-    if (storedQuestion) {
-      setQuestion(storedQuestion.question);
-      fetchAnswers(storedQuestion.questionId);
+    const storedQuestions = JSON.parse(localStorage.getItem('questions'));
+    if (storedQuestions && storedQuestions.length > 0) {
+      setQuestion(storedQuestions[currentQuestionIndex].question);
+      setQuestionId(storedQuestions[currentQuestionIndex].questionId);
+      fetchAnswersForAllQuestions(storedQuestions);
     }
-  }, []);
+  }, [currentQuestionIndex]);
 
-  const fetchAnswers = async (questionId) => {
+  useEffect(() => {
+    setIsTextVisible(false);
+  }, [question]);
+
+  const fetchAnswersForAllQuestions = async (questions) => {
+    const questionIds = questions.map(q => q.questionId);
     try {
-      const response = await fetch(`/api/answers/${questionId}`);
+      const response = await fetch('/api/answers/batch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ questionIds })
+      });
       const data = await response.json();
-      localStorage.setItem('best_answer', JSON.stringify(data));
+      const answersMap = {};
+      data.forEach(answer => {
+        answersMap[answer.questionId] = answer.best_answer;
+      });
+      localStorage.setItem('best_answers', JSON.stringify(answersMap));
       setAnswers(data);
     } catch (error) {
       console.error('Error fetching answers:', error);
@@ -28,6 +46,17 @@ const Interview_Real = () => {
   const toggleTextVisibility = () => {
     setIsTextVisible(!isTextVisible);
   };
+
+  const handleNextQuestion = () => {
+    const storedQuestions = JSON.parse(localStorage.getItem('questions'));
+    if (storedQuestions && currentQuestionIndex < storedQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setQuestion(storedQuestions[currentQuestionIndex + 1].question);
+      setQuestionId(storedQuestions[currentQuestionIndex + 1].questionId);
+    }
+  };
+
+  const currentAnswer = answers.find(answer => answer.questionId === questionId);
 
   return (
       <div className="Personal">
@@ -63,27 +92,40 @@ const Interview_Real = () => {
           </div>
 
           {/* 텍스트가 보이면 표시되는 부분 */}
-          {isTextVisible && (
+          {isTextVisible && currentAnswer && (
               <div>
-                {answers.map((answer, index) => (
-                    <p
-                        key={index}
-                        style={{
-                          color: '#000',
-                          fontFamily: 'Inter',
-                          fontSize: '20px',
-                          fontStyle: 'normal',
-                          fontWeight: 800,
-                          lineHeight: 'normal',
-                        }}
-                    >
-                      {index + 1}. {answer.best_answer}
-                      <br />
-                    </p>
-                ))}
+                <p
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Inter',
+                      fontSize: '20px',
+                      fontStyle: 'normal',
+                      fontWeight: 800,
+                      lineHeight: 'normal',
+                    }}
+                >
+                  {currentAnswer.best_answer}
+                </p>
               </div>
           )}
         </div>
+
+        {currentQuestionIndex < JSON.parse(localStorage.getItem('questions')).length - 1 && (
+            <div className="next_q_button" onClick={handleNextQuestion}>
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100"
+                  height="100"
+                  viewBox="0 0 100 100"
+                  fill="none"
+              >
+                <path
+                    d="M6.25 50C6.25 58.6529 8.81589 67.1115 13.6232 74.3062C18.4305 81.5008 25.2633 87.1084 33.2576 90.4197C41.2519 93.7311 50.0485 94.5975 58.5352 92.9094C67.0219 91.2213 74.8174 87.0545 80.9359 80.9359C87.0545 74.8174 91.2213 67.0219 92.9094 58.5352C94.5975 50.0485 93.7311 41.2519 90.4197 33.2576C87.1084 25.2633 81.5008 18.4305 74.3062 13.6232C67.1115 8.81589 58.6529 6.25 50 6.25C38.3968 6.25 27.2688 10.8594 19.0641 19.0641C10.8594 27.2688 6.25 38.3968 6.25 50ZM25 46.875H62.9687L45.5312 29.3531L50 25L75 50L50 75L45.5312 70.5406L62.9687 53.125H25V46.875Z"
+                    fill="#00D8FF"
+                />
+              </svg>
+            </div>
+        )}
       </div>
   );
 };

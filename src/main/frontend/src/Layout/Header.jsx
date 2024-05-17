@@ -27,7 +27,7 @@ function Header() {
         {isLoggedIn ? (
           // 로그인 후의 상단 바
           <>
-            <Link to="/Advice" className="mypage-button">
+            <Link to="/Mypage_real" className="mypage-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
@@ -147,7 +147,7 @@ function Header() {
               <Link to="/recruiting">채용 일정</Link>
             </li>
             <li>
-              <Link to="/test">시험 일정</Link>
+              <Link to="/Exam">시험 일정</Link>
             </li>
           </ul>
         </nav>

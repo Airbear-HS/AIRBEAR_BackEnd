@@ -177,13 +177,10 @@ function Process() {
           </svg>
           <div className="first_bear_text">
             <div className="number_bear">
-              04 다양한 외국어를 공부해서 합격률을 높여요.
+              04 다양한 외국어 시험에 응시해서 합격률을 높여요.
             </div>
 
-            <div>
-              승무원을 취업 후, 다국적 손님들에게 양질의 서비스를 제공할 수
-              있습니다.
-            </div>
+            <div>다국적 손님들에게 양질의 서비스를 제공할 수 있습니다.</div>
             <div>언어는 나의 힘!</div>
           </div>
         </div>

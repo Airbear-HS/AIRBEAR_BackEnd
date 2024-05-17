@@ -11,9 +11,10 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:8080/api/login', { userId, password });
       if (response.data.startsWith("로그인 성공")) {
-        const userId = response.data.split(": ")[1];
-        localStorage.setItem("userId", userId);// 사용자 ID를 로컬 스토리지에 저장
-        window.location.href = '/'; // 홈으로 리디렉션
+        const [userId, userName] = response.data.split(": ")[1].split(", ");
+        localStorage.setItem("userId", userId); // Store user ID
+        localStorage.setItem("userName", userName); // Store user name
+        window.location.href = '/'; // Redirect to home
       } else {
         alert(response.data);
       }
@@ -21,6 +22,7 @@ function Login() {
       alert('로그인 실패: 서버 오류');
     }
   };
+
   return (
       <div className="login-container">
         <form className="login-form" onSubmit={handleLogin}>

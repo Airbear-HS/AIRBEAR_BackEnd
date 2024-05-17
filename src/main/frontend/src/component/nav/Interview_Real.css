@@ -1,6 +1,6 @@
 .Personal-container {
   display: flex;
-  margin-left: 200px;
+  margin-left: 50px;
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
   width: 1200px;
@@ -38,4 +38,13 @@
 .questions svg {
   margin-top: 35px;
   align-self: flex-start; /* h2 요소의 왼쪽에 배치 */
+}
+
+.next_q_button {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  bottom: 20px; /* 아래쪽 여백 설정 */
+  margin-left: 1200px; /* 오른쪽 여백 설정 */
+  margin-bottom: 80px;
 }

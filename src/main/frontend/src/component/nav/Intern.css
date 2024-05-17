@@ -1,13 +1,19 @@
 .cmon {
   display: flex;
-  margin-left: 300px;
+  margin-left: 10px;
   margin-bottom: 50px;
 }
 
-.newmember {
-  margin-left: 160px;
+.newmember_container {
   display: flex;
   align-items: center;
+}
+
+.newmember {
+  /*이미지*/
+  align-items: center;
+  margin-left: 50px;
+  display: flex;
   gap: 20px;
   margin-bottom: 20px; /* 마지막 아이템을 제외한 간격 */
 }
@@ -26,11 +32,14 @@
   white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
 }
 
+.recruit_posting {
+}
+
 .recruit_nav {
+  /*네비게이션*/
   display: flex;
-  margin-left: 330px;
-  align-items: center;
-  width: 780px;
+  margin-left: 10px;
+  width: 600px;
   height: 30px;
   border-radius: 30px;
   background-color: #ffffff; /* 배경색 */
