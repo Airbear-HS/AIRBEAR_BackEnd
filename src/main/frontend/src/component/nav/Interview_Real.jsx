@@ -104,7 +104,12 @@ const Interview_Real = () => {
                       lineHeight: 'normal',
                     }}
                 >
-                  {currentAnswer.best_answer}
+                  {currentAnswer.best_answer.split('\n').map((paragraph, index) => (
+                      <React.Fragment key={index}>
+                        {paragraph}
+                        <br />
+                      </React.Fragment>
+                  ))}
                 </p>
               </div>
           )}
