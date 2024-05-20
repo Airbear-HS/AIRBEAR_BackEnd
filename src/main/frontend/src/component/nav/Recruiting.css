@@ -1,25 +1,16 @@
 .cmon {
-  display: flex;
-  margin-left: 10px;
-  margin-bottom: 50px;
-}
-
-.newmember_container {
-  display: flex;
-  align-items: center;
+  margin-top: 5px;
 }
 
 .newmember {
+  margin-top: 5px;
+  display: flex;
   /*이미지*/
   align-items: center;
-  margin-left: 50px;
+  margin-left: 30px;
   display: flex;
   gap: 20px;
-  margin-bottom: 20px; /* 마지막 아이템을 제외한 간격 */
-}
-
-.newmember img {
-  width: 40px; /* 아이콘 크기 */
+  margin-bottom: 10px; /* 마지막 아이템을 제외한 간격 */
 }
 
 .newmember p {

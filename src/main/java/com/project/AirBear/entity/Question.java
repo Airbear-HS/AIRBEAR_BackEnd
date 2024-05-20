@@ -10,16 +10,14 @@ public class Question {
     @Id
     private Integer questionId;
     private String language;
-    private Integer major;
     private String question;
 
     public Question(){
 
     }
-    public Question(Integer questionId, String language, Integer major, String question){
+    public Question(Integer questionId, String language, String question){
         this.questionId = questionId;
         this.language = language;
-        this.major = major;
         this.question = question;
     }
 
@@ -30,10 +28,6 @@ public class Question {
     public String getLanguage() { return language; }
 
     public void setLanguage(String language) { this.language = language; }
-
-    public Integer getMajor() { return major; }
-
-    public void setMajor(Integer major) { this.major = major; }
 
     public String getQuestion() { return question; }
 

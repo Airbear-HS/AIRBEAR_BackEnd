@@ -1,23 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Butt.css';
-import Uniform from './Uniform';
+
 import Advice from './Advice';
 import Health from './Health';
 
 function Butt() {
   return (
     <>
-      <Link to="/Uniform">
-        <div className="tips_1">
-          <div className="first_tip">
-            <div className="first_tip_text">
-              <div>👚 퍼스널 컬러 별 유니폼 👗 🩳 👖 🩱 🥻 👔</div>
-            </div>
-          </div>
-        </div>
-      </Link>
-
       <Link to="/Advice">
         <div className="tips_2">
           <div className="second_tip">

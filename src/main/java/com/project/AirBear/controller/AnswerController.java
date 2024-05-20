@@ -1,10 +1,8 @@
 package com.project.AirBear.controller;
 import com.project.AirBear.entity.Answer;
 import com.project.AirBear.repository.AnswerRepository;
-import com.project.AirBear.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 

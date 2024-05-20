@@ -8,17 +8,81 @@
   font-weight: 800;
   line-height: normal;
 }
-
 .workout_1 svg {
-  margin-left: 50px;
-  width: 300px;
-  height: 200px;
-  flex-shrink: 0;
-  border-radius: 30px;
+  align-items: center;
+  margin-left: 480px;
 }
 
 .workoutone img {
-  margin-left: 100px;
+  width: 500px;
+  height: 800px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  margin-bottom: 100px;
+}
+
+.workout_2 h2 {
+  align-items: center;
+  margin-left: 50px;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.workout_2 svg {
+  align-items: center;
+  margin-left: 480px;
+}
+
+.workouttwo img {
+  width: 500px;
+  height: 800px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  margin-bottom: 100px;
+}
+
+.workout_3 h2 {
+  align-items: center;
+  margin-left: 50px;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.workout_3 svg {
+  align-items: center;
+  margin-left: 360px;
+}
+
+.workoutthree img {
+  width: 600px;
+  height: 800px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  margin-bottom: 100px;
+}
+
+.workout_4 h2 {
+  align-items: center;
+  margin-left: 50px;
+  color: #00d8ff;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.workout_4 svg {
+  align-items: center;
+  margin-left: 360px;
+}
+
+.workoutfour img {
   width: 500px;
   height: 800px;
   flex-shrink: 0;

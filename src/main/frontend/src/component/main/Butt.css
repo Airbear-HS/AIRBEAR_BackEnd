@@ -1,4 +1,3 @@
-.tips_1,
 .tips_2,
 .tips_3 {
   display: flex;
@@ -12,8 +11,6 @@ a {
   color: inherit; /* 링크 색상을 상속받도록 설정 */
 }
 
-/* 위의 스타일을 각 .tips_1, .tips_2, .tips_3 안의 a 태그에도 적용하기 위해 추가 */
-.tips_1 a,
 .tips_2 a,
 .tips_3 a {
   text-decoration: none;
@@ -32,21 +29,8 @@ a {
   text-decoration: none;
 }
 
-.first_tip {
-  width: 1150px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #bcebf3;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0px;
-  text-decoration: none;
-}
-
 .second_tip {
-  width: 1150px;
+  width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,11 +42,11 @@ a {
 }
 
 .third_tip {
-  width: 1150px;
+  width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #63d3e4;
+  background-color: #7cc6d2;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
