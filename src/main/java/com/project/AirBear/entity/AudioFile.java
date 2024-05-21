@@ -8,6 +8,8 @@ import java.util.Date;
 @Table(name = "learning")
 public class AudioFile {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String userId;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -18,13 +20,12 @@ public class AudioFile {
     @Column(columnDefinition="LONGBLOB")
     private byte[] record;
 
-    public AudioFile() {}
+    public Long getId() {
+        return id;
+    }
 
-    public AudioFile(String userId, Date date, Integer questionId, byte[] record) {
-        this.userId = userId;
-        this.date = date;
-        this.questionId = questionId;
-        this.record = record;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -59,3 +60,4 @@ public class AudioFile {
         this.record = record;
     }
 }
+
