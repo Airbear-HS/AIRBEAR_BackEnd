@@ -57,3 +57,19 @@
   flex-shrink: 0;
   margin-bottom: 5px;
 }
+
+.record_button.clicked {
+  background-color: #00d8ff;
+  width: 30px;
+  height: 30px;
+}
+
+.recordcheck_button {
+  width: 30px;
+  height: 20px;
+  position: absolute; /* 절대 위치로 설정 */
+  bottom: 100px; /* 컨테이너의 아래쪽에서 20px */
+  left: 150px; /* 왼쪽에서 20px */
+  flex-shrink: 0;
+  margin-bottom: 5px;
+}
