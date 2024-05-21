@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Interview_Real.css';
 
 const Interview_Real = () => {
@@ -7,6 +7,10 @@ const Interview_Real = () => {
   const [questionId, setQuestionId] = useState('');
   const [answers, setAnswers] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioUrl, setAudioUrl] = useState('');
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
 
   useEffect(() => {
     const storedQuestions = JSON.parse(localStorage.getItem('questions'));
@@ -58,6 +62,50 @@ const Interview_Real = () => {
 
   const currentAnswer = answers.find(answer => answer.questionId === questionId);
 
+  const startRecording = () => {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          mediaRecorderRef.current = new MediaRecorder(stream);
+          mediaRecorderRef.current.ondataavailable = event => {
+            audioChunksRef.current.push(event.data);
+          };
+          mediaRecorderRef.current.start();
+          setIsRecording(true);
+        })
+        .catch(error => console.error('Error accessing microphone:', error));
+  };
+
+  const stopRecording = () => {
+    mediaRecorderRef.current.stop();
+    mediaRecorderRef.current.onstop = () => {
+      const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+      const formData = new FormData();
+      const userId = localStorage.getItem('userId');
+      formData.append('file', audioBlob, 'recording.wav');
+      formData.append('questionId', questionId);
+      formData.append('userId', userId);
+
+      fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log('File uploaded successfully:', data);
+            setAudioUrl(data.audioUrl);
+          })
+          .catch(error => console.error('Error uploading file:', error));
+
+      audioChunksRef.current = [];
+      setIsRecording(false);
+    };
+  };
+
+  const playRecording = () => {
+    const audio = new Audio(audioUrl);
+    audio.play();
+  };
+
   return (
       <div className="Personal">
         <div className="Personal-container">
@@ -107,14 +155,23 @@ const Interview_Real = () => {
                   {currentAnswer.best_answer.split('\n').map((paragraph, index) => (
                       <React.Fragment key={index}>
                         {paragraph}
-                        <br />
+                        <br/>
                       </React.Fragment>
                   ))}
                 </p>
               </div>
           )}
         </div>
-
+        <div className="recording-buttons">
+          {!isRecording ? (
+              <button onClick={startRecording}>녹음 시작</button>
+          ) : (
+              <button onClick={stopRecording}>녹음 종료</button>
+          )}
+          {audioUrl && (
+              <button onClick={playRecording}>녹음 확인</button>
+          )}
+        </div>
         {currentQuestionIndex < JSON.parse(localStorage.getItem('questions')).length - 1 && (
             <div className="next_q_button" onClick={handleNextQuestion}>
               <svg
