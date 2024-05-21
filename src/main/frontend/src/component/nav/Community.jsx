@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Community.css';
 
 function Community() {
@@ -6,20 +6,36 @@ function Community() {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [audioFiles, setAudioFiles] = useState([]);
+  const [selectedAudio, setSelectedAudio] = useState(null);
 
-  const handleWrite = () => {
-    setIsEditing(true);
+  const handleWrite = async () => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      try {
+        const response = await fetch(`/api/audio-files/${userId}`);
+        const data = await response.json();
+        setAudioFiles(data);
+        setIsEditing(true);
+      } catch (error) {
+        console.error('Error fetching audio files:', error);
+      }
+    } else {
+      alert('User ID not found in localStorage.');
+    }
   };
 
   const handleDelete = () => {
     setText('');
+    setSelectedAudio(null);
     setIsEditing(false);
   };
 
   const handleSave = () => {
-    if (text.trim()) {
-      setPosts([...posts, text]);
+    if (text.trim() && selectedAudio) {
+      setPosts([...posts, { text, audio: selectedAudio }]);
       setText('');
+      setSelectedAudio(null);
       setIsEditing(false);
     }
   };
@@ -48,7 +64,23 @@ function Community() {
   return (
       <div className="community_real">
         {isEditing ? (
-            <textarea value={text} onChange={handleChange} />
+            <>
+              <textarea value={text} onChange={handleChange} />
+              <div className="audio_list">
+                {audioFiles.map((file) => (
+                    <div key={file.id}>
+                      <input
+                          type="radio"
+                          id={`audio-${file.id}`}
+                          name="audio"
+                          value={file.id}
+                          onChange={() => setSelectedAudio(file.id)}
+                      />
+                      <label htmlFor={`audio-${file.id}`}>{file.date}</label>
+                    </div>
+                ))}
+              </div>
+            </>
         ) : (
             <p>{text}</p>
         )}
@@ -69,7 +101,8 @@ function Community() {
         <div className="posts_list">
           {posts.map((post, index) => (
               <div key={index} className="post_item">
-                <p>{post}</p>
+                <p>{post.text}</p>
+                <audio controls src={`/api/download/${post.audio}`} />
                 <div className="comment_section">
                   {comments[index] &&
                       comments[index].map((comment, commentIndex) => (

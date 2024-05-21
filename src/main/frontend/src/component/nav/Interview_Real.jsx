@@ -97,6 +97,7 @@ const Interview_Real = () => {
       formData.append('file', audioBlob, 'recording.wav');
       formData.append('questionId', questionId);
       formData.append('userId', userId);
+      formData.append('question', question);
 
       fetch('/api/upload', {
         method: 'POST',

@@ -15,11 +15,23 @@ public class AudioFile {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private Integer questionId;
+    private String question;
 
     @Lob
     @Column(columnDefinition="LONGBLOB")
     private byte[] record;
 
+    public AudioFile() {}
+
+    public AudioFile(String userId, Date date, Integer questionId, String question, byte[] record) {
+        this.userId = userId;
+        this.date = date;
+        this.questionId = questionId;
+        this.question = question;
+        this.record = record;
+    }
+
+    // Getter와 Setter 메서드들
     public Long getId() {
         return id;
     }
@@ -50,6 +62,14 @@ public class AudioFile {
 
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public byte[] getRecord() {

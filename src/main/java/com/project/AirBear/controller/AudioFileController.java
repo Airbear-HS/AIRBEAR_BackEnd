@@ -21,9 +21,17 @@ public class AudioFileController {
     @Autowired
     private AudioFileRepository audioFileRepository;
 
+    @GetMapping("/audio-files/{userId}")
+    public List<AudioFile> getAudioFilesByUserId(@PathVariable String userId) {
+        return audioFileRepository.findByUserIdOrderByDateDesc(userId);
+    }
+
     @PostMapping("/upload")
     @Transactional
-    public Map<String, String> uploadAudioFile(@RequestParam("file") MultipartFile file, @RequestParam("questionId") Integer questionId, @RequestParam("userId") String userId) {
+    public Map<String, String> uploadAudioFile(@RequestParam("file") MultipartFile file,
+                                               @RequestParam("questionId") Integer questionId,
+                                               @RequestParam("userId") String userId,
+                                               @RequestParam("question") String question) {
         if (userId == null || userId.trim().isEmpty()) {
             throw new IllegalArgumentException("userId cannot be null or empty");
         }
@@ -33,6 +41,7 @@ public class AudioFileController {
             audioFile.setDate(new Date());
             audioFile.setQuestionId(questionId);
             audioFile.setUserId(userId);
+            audioFile.setQuestion(question);
             audioFile.setRecord(file.getBytes());
 
             audioFileRepository.save(audioFile);
