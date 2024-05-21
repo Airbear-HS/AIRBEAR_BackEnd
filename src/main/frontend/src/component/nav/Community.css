@@ -1,0 +1,101 @@
+.community_real {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+textarea {
+  width: 1300px;
+  height: 500px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  border: 3px solid #00d8ff;
+}
+
+textarea:hover {
+  border-color: #00d8ff;
+}
+
+.post_button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.post_real_button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff; /* 버튼 글자 색상 */
+  background-color: #00d8ff; /* 버튼 배경 색상 */
+  transition: background-color 0.3s;
+}
+
+.post_real_button:hover {
+  background-color: #00a6cc; /* 호버 시 버튼 배경 색상 */
+}
+
+.post_real_button:active {
+  background-color: #008bb3; /* 클릭 시 버튼 배경 색상 */
+}
+
+.posts_list {
+  margin-top: 30px;
+}
+
+.post_item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #00d8ff;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.comment_section {
+  margin-top: 10px;
+}
+
+.comment_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #fffff;
+  padding: 5px 0;
+}
+
+.comment_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comment_input input {
+  width: 80%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.comment_button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff; /* 버튼 글자 색상 */
+  background-color: #00d8ff; /* 버튼 배경 색상 */
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.comment_button:hover {
+  background-color: #00a6cc; /* 호버 시 버튼 배경 색상 */
+}
+
+.comment_button:active {
+  background-color: #008bb3; /* 클릭 시 버튼 배경 색상 */
+}

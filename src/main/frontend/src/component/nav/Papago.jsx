@@ -12,6 +12,7 @@ function Papago() {
           <p>✈️채용 일정</p>
         </div>
       </div>
+
       <div className="recruit_posting">
         <nav className="recruit_nav">
           <ul className="recruit_nav-links">

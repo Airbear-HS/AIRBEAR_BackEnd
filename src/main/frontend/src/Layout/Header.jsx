@@ -138,7 +138,7 @@ function Header() {
               <Link to="/process">프로세스</Link>
             </li>
             <li>
-              <Link to="/techniques">핵심기술</Link>
+              <Link to="/Communit">커뮤니티</Link>
             </li>
             <li>
               <Link to="/interview">인터뷰 연습</Link>

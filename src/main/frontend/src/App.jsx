@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-
 import AppLayout from './Layout/AppLayout';
 import { Home } from './component/Home';
 import Test from './component//Test';
@@ -11,10 +10,9 @@ import Login_Success from './component/member/Login_Success';
 import Login_Fail from './component/member/Login_Fail';
 import Service from './component/nav/Service';
 import Process from './component/nav/Process';
-import Techniques from './component/nav/Techniques';
+import Community from './component/nav/Community';
 import Interview from './component/nav/Interview';
 import Recruiting from './component/nav/Recruiting';
-
 import Advice from './component/main/Advice';
 import Health from './component/main/Health';
 import Papago from './component/nav/Papago';
@@ -54,7 +52,7 @@ function App() {
           <Routes>
             <Route path="/service" element={<Service />} />
             <Route path="/process" element={<Process />} />
-            <Route path="/techniques" element={<Techniques />} />
+            <Route path="/Community" element={<Community />} />
             <Route path="/interview" element={loggedIn ? <Interview /> : <Navigate to="/login" />} />
             <Route path="/recruiting" element={<Recruiting />} />
             <Route path="/test" element={<Test />} />
