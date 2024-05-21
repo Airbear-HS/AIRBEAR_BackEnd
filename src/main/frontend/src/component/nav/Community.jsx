@@ -37,7 +37,7 @@ function Community() {
 
   const handleDeleteComment = (postIndex, commentIndex) => {
     const updatedComments = comments[postIndex].filter(
-      (_, i) => i !== commentIndex
+        (_, i) => i !== commentIndex
     );
     setComments({
       ...comments,
@@ -46,51 +46,51 @@ function Community() {
   };
 
   return (
-    <div className="community_real">
-      {isEditing ? (
-        <textarea value={text} onChange={handleChange} />
-      ) : (
-        <p>{text}</p>
-      )}
-      <div className="post_button">
+      <div className="community_real">
         {isEditing ? (
-          <button className="post_real_button" onClick={handleSave}>
-            저장하기
-          </button>
+            <textarea value={text} onChange={handleChange} />
         ) : (
-          <button className="post_real_button" onClick={handleWrite}>
-            작성하기
-          </button>
+            <p>{text}</p>
         )}
-        <button className="post_real_button" onClick={handleDelete}>
-          삭제하기
-        </button>
+        <div className="post_button">
+          {isEditing ? (
+              <button className="post_real_button" onClick={handleSave}>
+                저장하기
+              </button>
+          ) : (
+              <button className="post_real_button" onClick={handleWrite}>
+                작성하기
+              </button>
+          )}
+          <button className="post_real_button" onClick={handleDelete}>
+            삭제하기
+          </button>
+        </div>
+        <div className="posts_list">
+          {posts.map((post, index) => (
+              <div key={index} className="post_item">
+                <p>{post}</p>
+                <div className="comment_section">
+                  {comments[index] &&
+                      comments[index].map((comment, commentIndex) => (
+                          <div key={commentIndex} className="comment_item">
+                            <p>{comment}</p>
+                            <button
+                                className="comment_button"
+                                onClick={() => handleDeleteComment(index, commentIndex)}
+                            >
+                              댓글 삭제
+                            </button>
+                          </div>
+                      ))}
+                  <CommentInput
+                      onAddComment={(comment) => handleAddComment(index, comment)}
+                  />
+                </div>
+              </div>
+          ))}
+        </div>
       </div>
-      <div className="posts_list">
-        {posts.map((post, index) => (
-          <div key={index} className="post_item">
-            <p>{post}</p>
-            <div className="comment_section">
-              {comments[index] &&
-                comments[index].map((comment, commentIndex) => (
-                  <div key={commentIndex} className="comment_item">
-                    <p>{comment}</p>
-                    <button
-                      className="comment_button"
-                      onClick={() => handleDeleteComment(index, commentIndex)}
-                    >
-                      댓글 삭제
-                    </button>
-                  </div>
-                ))}
-              <CommentInput
-                onAddComment={(comment) => handleAddComment(index, comment)}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -109,17 +109,17 @@ function CommentInput({ onAddComment }) {
   };
 
   return (
-    <div className="comment_input">
-      <input
-        type="text"
-        value={commentText}
-        onChange={handleCommentChange}
-        placeholder="댓글 쓰기"
-      />
-      <button className="comment_button" onClick={handleCommentSubmit}>
-        댓글 저장
-      </button>
-    </div>
+      <div className="comment_input">
+        <input
+            type="text"
+            value={commentText}
+            onChange={handleCommentChange}
+            placeholder="댓글 쓰기"
+        />
+        <button className="comment_button" onClick={handleCommentSubmit}>
+          댓글 저장
+        </button>
+      </div>
   );
 }
 

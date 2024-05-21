@@ -1,9 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import './Mypage_real.css';
 import Facebear from '../game/Facebear';
 
 function Mypage_real() {
   const userName = localStorage.getItem('userName');
+
+  useEffect(() => {
+    const calendarEl = document.getElementById('calendar');
+
+    if (calendarEl) {
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [dayGridPlugin, interactionPlugin],
+        googleCalendarApiKey: 'AIzaSyCLdnuOpJmCWTgXlAMvGy7nUb8Iq1KBdrk',
+        eventSources: [
+          {
+            googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+            className: '웹디자인기능사',
+            color: '#be5683',
+          },
+          {
+            googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+            className: '정보처리기능사',
+            color: '#204051',
+          },
+          {
+            googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+            className: '정보처리기사',
+            color: '#3b6978',
+          }
+        ]
+      });
+      calendar.render();
+    }
+  }, []);
+
   return (
     <div className="page_mine">
       <header className="mine_header">
@@ -82,7 +115,29 @@ function Mypage_real() {
       </div>
       <div className="hi-card">
         <div className="mypage_api">
-          <p>캘린더 api넣을 곳</p>
+          <FullCalendar
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              googleCalendarApiKey="AIzaSyCLdnuOpJmCWTgXlAMvGy7nUb8Iq1KBdrk"
+              eventSources={[
+                {
+                  googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+                  className: '웹디자인기능사',
+                  color: '#be5683',
+                },
+                {
+                  googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+                  className: '정보처리기능사',
+                  color: '#204051',
+                },
+                {
+                  googleCalendarId: '594745dd97c2b12245887d103a1e1dad5b3844404dc1a4f04a1a2bc3cdfd31eb@group.calendar.google.com',
+                  className: '정보처리기사',
+                  color: '#3b6978',
+                }
+              ]}
+          />
+
         </div>
       </div>
       <div className="extra-space_api"></div>
