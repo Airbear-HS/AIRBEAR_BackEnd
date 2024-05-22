@@ -11,9 +11,20 @@ function Community() {
 
   useEffect(() => {
     fetch('/api/community-posts')
-        .then(response => response.json())
-        .then(data => setPosts(data))
-        .catch(error => console.error('Error fetching community posts:', error));
+        .then((response) => response.json())
+        .then((data) => {
+          setPosts(data);
+          const initialComments = {};
+          data.forEach((post) => {
+            if (post.comment) {
+              initialComments[post.id] = post.comment.split('\n');
+            } else {
+              initialComments[post.id] = [];
+            }
+          });
+          setComments(initialComments);
+        })
+        .catch((error) => console.error('Error fetching posts:', error));
   }, []);
 
   const handleWrite = async () => {
@@ -39,39 +50,33 @@ function Community() {
   };
 
   const handleSave = async () => {
-    const userId = localStorage.getItem('userId');
-    if (text.trim() && selectedAudio && userId) {
-      const selectedAudioFile = audioFiles.find(file => file.id === selectedAudio);
-      if (selectedAudioFile) {
-        const postData = {
-          userId,
-          text,
-          record: selectedAudioFile.record,
-          date: new Date().toISOString(),
-          question: selectedAudioFile.question,
-        };
-
+    if (text.trim() && selectedAudio) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
         try {
           const response = await fetch('/api/community-posts', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(postData),
+            body: JSON.stringify({
+              userId,
+              text,
+              record: selectedAudio.record,
+              question: selectedAudio.question,
+            }),
           });
 
-          if (response.ok) {
-            const newPost = await response.json();
-            setPosts([...posts, newPost]);
-            setText('');
-            setSelectedAudio(null);
-            setIsEditing(false);
-          } else {
-            console.error('Error saving post:', response.statusText);
-          }
+          const newPost = await response.json();
+          setPosts([...posts, newPost]);
+          setText('');
+          setSelectedAudio(null);
+          setIsEditing(false);
         } catch (error) {
           console.error('Error saving post:', error);
         }
+      } else {
+        alert('User ID not found in localStorage.');
       }
     }
   };
@@ -80,21 +85,47 @@ function Community() {
     setText(event.target.value);
   };
 
-  const handleAddComment = (index, comment) => {
-    setComments({
-      ...comments,
-      [index]: comments[index] ? [...comments[index], comment] : [comment],
-    });
+  const handleAddComment = async (postId, comment) => {
+    try {
+      const response = await fetch(`/api/community-posts/${postId}/comment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ comment }),
+      });
+
+      if (response.ok) {
+        setComments({
+          ...comments,
+          [postId]: comments[postId] ? [...comments[postId], comment] : [comment],
+        });
+      } else {
+        console.error('Error saving comment:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error saving comment:', error);
+    }
   };
 
-  const handleDeleteComment = (postIndex, commentIndex) => {
-    const updatedComments = comments[postIndex].filter(
-        (_, i) => i !== commentIndex
-    );
-    setComments({
-      ...comments,
-      [postIndex]: updatedComments,
-    });
+  const handleDeleteComment = async (postId, commentIndex) => {
+    try {
+      const response = await fetch(`/api/community-posts/${postId}/comment/${commentIndex}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        const updatedComments = comments[postId].filter((_, i) => i !== commentIndex);
+        setComments({
+          ...comments,
+          [postId]: updatedComments,
+        });
+      } else {
+        console.error('Error deleting comment:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
   };
 
   return (
@@ -110,7 +141,7 @@ function Community() {
                           id={`audio-${file.id}`}
                           name="audio"
                           value={file.id}
-                          onChange={() => setSelectedAudio(file.id)}
+                          onChange={() => setSelectedAudio(file)}
                       />
                       <audio controls src={`/api/download/${file.id}`} />
                       <p>{file.question}</p>
@@ -136,40 +167,36 @@ function Community() {
           </button>
         </div>
         <div className="posts_list">
-          {posts.length === 0 ? (
-              <p>게시물이 없습니다</p>
-          ) : (
-              posts.map((post, index) => (
-                  <div key={index} className="post_item">
-                    <p>{post.question}</p>
-                    <audio controls src={`/api/download/${post.record}`}/>
+          {posts.length > 0 ? (
+              posts.map((post) => (
+                  <div key={post.id} className="post_item">
                     <p>{post.text}</p>
+                    <p>{post.question}</p>
+                    <audio controls src={`data:audio/wav;base64,${post.record}`} />
                     <div className="comment_section">
-                      {comments[index] &&
-                          comments[index].map((comment, commentIndex) => (
+                      {comments[post.id] &&
+                          comments[post.id].map((comment, commentIndex) => (
                               <div key={commentIndex} className="comment_item">
                                 <p>{comment}</p>
-                                <button
-                                    className="comment_button"
-                                    onClick={() => handleDeleteComment(index, commentIndex)}
-                                >
+                                <button className="comment_button"
+                                        onClick={() => handleDeleteComment(post.id, commentIndex)}>
                                   댓글 삭제
                                 </button>
                               </div>
                           ))}
-                      <CommentInput
-                          onAddComment={(comment) => handleAddComment(index, comment)}
-                      />
+                      <CommentInput onAddComment={(comment) => handleAddComment(post.id, comment)} />
                     </div>
                   </div>
               ))
+          ) : (
+              <p>게시물이 없습니다</p>
           )}
         </div>
       </div>
   );
 }
 
-function CommentInput({ onAddComment }) {
+function CommentInput({onAddComment}) {
   const [commentText, setCommentText] = useState('');
 
   const handleCommentChange = (event) => {
