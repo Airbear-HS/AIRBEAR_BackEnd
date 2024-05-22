@@ -1,7 +1,9 @@
 package com.project.AirBear.controller;
 
 import com.project.AirBear.entity.AudioFile;
+import com.project.AirBear.entity.CommunityPost;
 import com.project.AirBear.repository.AudioFileRepository;
+import com.project.AirBear.repository.CommunityPostRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -9,10 +11,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -20,35 +24,42 @@ public class AudioFileController {
 
     @Autowired
     private AudioFileRepository audioFileRepository;
+    @Autowired
+    private CommunityPostRepository communityPostRepository;
 
     @GetMapping("/audio-files/{userId}")
     public List<AudioFile> getAudioFilesByUserId(@PathVariable String userId) {
         return audioFileRepository.findByUserIdOrderByDateDesc(userId);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/community-posts")
     @Transactional
-    public Map<String, String> uploadAudioFile(@RequestParam("file") MultipartFile file,
-                                               @RequestParam("questionId") Integer questionId,
-                                               @RequestParam("userId") String userId,
-                                               @RequestParam("question") String question) {
-        if (userId == null || userId.trim().isEmpty()) {
-            throw new IllegalArgumentException("userId cannot be null or empty");
-        }
+    public ResponseEntity<CommunityPost> createCommunityPost(@RequestBody CommunityPost communityPost) {
+        CommunityPost savedPost = communityPostRepository.save(communityPost);
+        return ResponseEntity.ok(savedPost);
+    }
 
+    @GetMapping("/community-posts")
+    public List<CommunityPost> getCommunityPosts() {
+        return communityPostRepository.findAll();
+    }
+
+    @GetMapping("/audio-files/{userId}/{date}")
+    public ResponseEntity<List<AudioFile>> getAudioFilesByUserIdAndDate(
+            @PathVariable String userId,
+            @PathVariable String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            AudioFile audioFile = new AudioFile();
-            audioFile.setDate(new Date());
-            audioFile.setQuestionId(questionId);
-            audioFile.setUserId(userId);
-            audioFile.setQuestion(question);
-            audioFile.setRecord(file.getBytes());
+            Date parsedDate = formatter.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(parsedDate);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            Date nextDay = calendar.getTime();
 
-            audioFileRepository.save(audioFile);
-            String audioUrl = "/api/download/" + audioFile.getId();
-            return Collections.singletonMap("audioUrl", audioUrl);
-        } catch (IOException e) {
-            return Collections.singletonMap("error", "파일 업로드 실패: " + e.getMessage());
+            List<AudioFile> audioFiles = audioFileRepository.findByUserIdAndDateBetween(userId, parsedDate, nextDay);
+            return ResponseEntity.ok(audioFiles);
+        } catch (ParseException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -61,4 +72,3 @@ public class AudioFileController {
                 .body(new ByteArrayResource(audioFile.getRecord()));
     }
 }
-

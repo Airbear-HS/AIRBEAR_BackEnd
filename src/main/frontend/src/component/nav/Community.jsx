@@ -9,6 +9,13 @@ function Community() {
   const [audioFiles, setAudioFiles] = useState([]);
   const [selectedAudio, setSelectedAudio] = useState(null);
 
+  useEffect(() => {
+    fetch('/api/community-posts')
+        .then(response => response.json())
+        .then(data => setPosts(data))
+        .catch(error => console.error('Error fetching community posts:', error));
+  }, []);
+
   const handleWrite = async () => {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -31,12 +38,41 @@ function Community() {
     setIsEditing(false);
   };
 
-  const handleSave = () => {
-    if (text.trim() && selectedAudio) {
-      setPosts([...posts, { text, audio: selectedAudio }]);
-      setText('');
-      setSelectedAudio(null);
-      setIsEditing(false);
+  const handleSave = async () => {
+    const userId = localStorage.getItem('userId');
+    if (text.trim() && selectedAudio && userId) {
+      const selectedAudioFile = audioFiles.find(file => file.id === selectedAudio);
+      if (selectedAudioFile) {
+        const postData = {
+          userId,
+          text,
+          record: selectedAudioFile.record,
+          date: new Date().toISOString(),
+          question: selectedAudioFile.question,
+        };
+
+        try {
+          const response = await fetch('/api/community-posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+          });
+
+          if (response.ok) {
+            const newPost = await response.json();
+            setPosts([...posts, newPost]);
+            setText('');
+            setSelectedAudio(null);
+            setIsEditing(false);
+          } else {
+            console.error('Error saving post:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error saving post:', error);
+        }
+      }
     }
   };
 
@@ -76,7 +112,8 @@ function Community() {
                           value={file.id}
                           onChange={() => setSelectedAudio(file.id)}
                       />
-                      <label htmlFor={`audio-${file.id}`}>{file.date}</label>
+                      <audio controls src={`/api/download/${file.id}`} />
+                      <p>{file.question}</p>
                     </div>
                 ))}
               </div>
@@ -99,29 +136,34 @@ function Community() {
           </button>
         </div>
         <div className="posts_list">
-          {posts.map((post, index) => (
-              <div key={index} className="post_item">
-                <p>{post.text}</p>
-                <audio controls src={`/api/download/${post.audio}`} />
-                <div className="comment_section">
-                  {comments[index] &&
-                      comments[index].map((comment, commentIndex) => (
-                          <div key={commentIndex} className="comment_item">
-                            <p>{comment}</p>
-                            <button
-                                className="comment_button"
-                                onClick={() => handleDeleteComment(index, commentIndex)}
-                            >
-                              댓글 삭제
-                            </button>
-                          </div>
-                      ))}
-                  <CommentInput
-                      onAddComment={(comment) => handleAddComment(index, comment)}
-                  />
-                </div>
-              </div>
-          ))}
+          {posts.length === 0 ? (
+              <p>게시물이 없습니다</p>
+          ) : (
+              posts.map((post, index) => (
+                  <div key={index} className="post_item">
+                    <p>{post.question}</p>
+                    <audio controls src={`/api/download/${post.record}`}/>
+                    <p>{post.text}</p>
+                    <div className="comment_section">
+                      {comments[index] &&
+                          comments[index].map((comment, commentIndex) => (
+                              <div key={commentIndex} className="comment_item">
+                                <p>{comment}</p>
+                                <button
+                                    className="comment_button"
+                                    onClick={() => handleDeleteComment(index, commentIndex)}
+                                >
+                                  댓글 삭제
+                                </button>
+                              </div>
+                          ))}
+                      <CommentInput
+                          onAddComment={(comment) => handleAddComment(index, comment)}
+                      />
+                    </div>
+                  </div>
+              ))
+          )}
         </div>
       </div>
   );
