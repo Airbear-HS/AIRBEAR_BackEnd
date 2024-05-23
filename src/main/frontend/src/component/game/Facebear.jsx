@@ -33,6 +33,8 @@ const faces = [
   '🐌',
   '🐘',
   '🦄',
+  '🦀',
+  '🐀',
 ];
 
 const getRandomFace = () => {
