@@ -133,4 +133,12 @@ public class AudioFileController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new ByteArrayResource(audioFile.getRecord()));
     }
+
+    @DeleteMapping("/audio-files/{id}")
+    public ResponseEntity<Void> deleteAudioFile(@PathVariable Long id) {
+        AudioFile audioFile = audioFileRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("파일을 찾을 수 없습니다. id: " + id));
+        audioFileRepository.delete(audioFile);
+        return ResponseEntity.ok().build();
+    }
 }
