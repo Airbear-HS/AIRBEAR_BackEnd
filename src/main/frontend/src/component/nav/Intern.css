@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .cmon {
   justify-content: center; /* Centers the table horizontally */
 }
@@ -99,4 +102,81 @@
 
 .recruitment-table th {
   background-color: #00d8ff;
+}
+
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+  .newmember p {
+    font-size: 50px; /* 아이패드 크기에 맞게 폰트 크기 조정 */
+  }
+
+  .recruit_nav {
+    width: 80%; /* 아이패드에서 너비 조정 */
+    margin-left: 0; /* 아이패드에서 좌측 마진 제거 */
+  }
+
+  .recruit_nav-links li {
+    padding: 0 20px; /* 아이패드에서 좌우 여백 조정 */
+  }
+
+  .recruit_nav-links a {
+    font-size: 18px; /* 아이패드에서 링크 폰트 크기 조정 */
+  }
+
+  .recruitment-table {
+    margin-left: 0; /* 아이패드에서 좌측 마진 제거 */
+  }
+}
+
+@media (max-width: 768px) {
+  .newmember p {
+    font-size: 40px; /* 태블릿에서 폰트 크기 조정 */
+  }
+
+  .recruit_nav {
+    width: 90%; /* 태블릿에서 너비 조정 */
+    margin-left: 0; /* 태블릿에서 좌측 마진 제거 */
+  }
+
+  .recruit_nav-links li {
+    padding: 0 10px; /* 태블릿에서 좌우 여백 조정 */
+  }
+
+  .recruit_nav-links a {
+    font-size: 16px; /* 태블릿에서 링크 폰트 크기 조정 */
+  }
+
+  .recruitment-table {
+    margin-left: 0; /* 태블릿에서 좌측 마진 제거 */
+  }
+}
+
+@media (max-width: 480px) {
+  .newmember p {
+    font-size: 30px; /* 작은 화면에서 폰트 크기 조정 */
+  }
+
+  .recruit_nav {
+    width: 100%; /* 작은 화면에서 너비 조정 */
+    margin-left: 0; /* 작은 화면에서 좌측 마진 제거 */
+  }
+
+  .recruit_nav-links {
+    flex-direction: column; /* 작은 화면에서 세로 배치 */
+    align-items: center; /* 중앙 정렬 */
+  }
+
+  .recruit_nav-links li {
+    padding: 10px 0; /* 작은 화면에서 좌우 여백 조정 */
+  }
+
+  .recruit_nav-links a {
+    font-size: 14px; /* 작은 화면에서 링크 폰트 크기 조정 */
+  }
+
+  .recruitment-table {
+    margin-left: 0; /* 작은 화면에서 좌측 마진 제거 */
+    max-width: 100%; /* 작은 화면에서 최대 너비 설정 */
+  }
 }

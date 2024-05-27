@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .page_mine {
   font-family: 'Arial', sans-serif;
   background-color: #ffffff;
@@ -274,4 +277,221 @@
 
 .checklist-container button:hover {
   background-color: #00a6cc;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+  .mine_header h1 {
+    font-size: 50px;
+  }
+
+  .logo_mypage {
+    margin-left: 20px;
+  }
+
+  .logo_mypage svg {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo_mypage span {
+    font-size: 30px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .date-card,
+  .checklist-container {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 160px;
+  }
+
+  .cards-container h2 {
+    font-size: 30px;
+  }
+
+  .cards-container p {
+    font-size: 25px;
+  }
+
+  .mypage_intro h2 {
+    margin-right: 0;
+    font-size: 30px;
+  }
+
+  .mypage_intro p {
+    margin-right: 0;
+    font-size: 25px;
+  }
+
+  .facebear {
+    margin-right: 0;
+  }
+
+  .fc {
+    width: 100%;
+    height: auto;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 20px;
+  }
+
+  .fc .fc-daygrid-day-number,
+  .fc .fc-col-header-cell-cushion {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mine_header h1 {
+    font-size: 40px;
+  }
+
+  .logo_mypage {
+    margin-left: 10px;
+  }
+
+  .logo_mypage svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo_mypage span {
+    font-size: 25px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .date-card,
+  .checklist-container {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 110px;
+  }
+
+  .cards-container h2 {
+    font-size: 25px;
+  }
+
+  .cards-container p {
+    font-size: 20px;
+  }
+
+  .mypage_intro h2 {
+    margin-right: 0;
+    font-size: 25px;
+  }
+
+  .mypage_intro p {
+    margin-right: 0;
+    font-size: 20px;
+  }
+
+  .facebear {
+    margin-right: 0;
+  }
+
+  .fc {
+    width: 100%;
+    height: auto;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 18px;
+  }
+
+  .fc .fc-daygrid-day-number,
+  .fc .fc-col-header-cell-cushion {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mine_header h1 {
+    font-size: 30px;
+  }
+
+  .logo_mypage {
+    margin-left: 5px;
+  }
+
+  .logo_mypage svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo_mypage span {
+    font-size: 20px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .date-card,
+  .checklist-container {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 90px;
+  }
+
+  .cards-container h2 {
+    font-size: 20px;
+  }
+
+  .cards-container p {
+    font-size: 18px;
+  }
+
+  .mypage_intro h2 {
+    margin-right: 0;
+    font-size: 20px;
+  }
+
+  .mypage_intro p {
+    margin-right: 0;
+    font-size: 18px;
+  }
+
+  .facebear {
+    margin-right: 0;
+  }
+
+  .fc {
+    width: 100%;
+    height: auto;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 16px;
+  }
+
+  .fc .fc-daygrid-day-number,
+  .fc .fc-col-header-cell-cushion {
+    font-size: 10px;
+  }
 }

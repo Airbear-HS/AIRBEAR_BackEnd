@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .headerbody, .top-bar, .login-button, .signup-button, .logout-button, .header-content, .logo, .bear p, .navigation, .nav-links, .nav-links a {
   font-family: 'Inter', sans-serif !important;
 }
@@ -123,6 +126,37 @@
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .nav-links li {
+    padding: 10px 10px;
+  }
+
+  .bear p {
+    font-size: 35px;
+  }
+
+  .logo img {
+    width: 80px;
+  }
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -135,13 +169,64 @@
   }
 
   .nav-links {
-    flex-direction: row; /* 수평 레이아웃 유지 */
-    flex-wrap: nowrap; /* 줄 바꿈 방지 */
-    justify-content: center; /* 항목을 중앙 정렬 */
-    overflow-x: auto; /* 수평 스크롤 활성화 */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
   }
 
   .nav-links li {
-    padding: 10px 10px; /* 간격 조정 */
+    padding: 10px 10px;
+  }
+
+  .bear p {
+    font-size: 30px;
+  }
+
+  .logo img {
+    width: 70px;
+  }
+
+  .login-button,
+  .signup-button,
+  .logout-button {
+    font-size: 14px;
+    padding: 4px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation {
+    width: 85%;
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links li {
+    padding: 10px 0;
+  }
+
+  .bear p {
+    font-size: 25px;
+  }
+
+  .logo img {
+    width: 60px;
+  }
+
+  .login-button,
+  .signup-button,
+  .logout-button {
+    font-size: 12px;
+    padding: 3px 10px;
   }
 }

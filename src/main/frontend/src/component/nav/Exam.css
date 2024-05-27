@@ -1,3 +1,5 @@
+/*쿼리 조정 완료*/
+
 .examtable {
   align-items: center;
   width: 100%; /* 너비를 화면에 맞게 조절 */
@@ -5,7 +7,7 @@
   min-width: 1300px; /* 최소 너비 설정, 필요에 따라 조정 가능 */
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: 180px;
+  margin-left: 100px;
   border: 2px solid #0056b3;
   background: #fff;
   margin-bottom: 50px;
@@ -38,4 +40,44 @@
 
 .Japanese {
   color: red;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+  .examtable {
+    min-width: 600px; /* 아이패드에서 최소 너비 조정 */
+    margin-left: 10px; /* 좌측 여백 */
+    margin-right: 10px; /* 우측 여백 */
+  }
+
+  .examtable th,
+  .examtable td {
+    font-size: 14px; /* 아이패드에서 폰트 크기 조정 */
+  }
+}
+
+@media (max-width: 768px) {
+  .examtable {
+    min-width: 400px; /* 작은 태블릿에서 최소 너비 조정 */
+    margin-left: 5px; /* 좌측 여백 */
+    margin-right: 5px; /* 우측 여백 */
+  }
+
+  .examtable th,
+  .examtable td {
+    font-size: 12px; /* 작은 태블릿에서 폰트 크기 조정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .examtable {
+    min-width: 300px; /* 작은 화면에서 최소 너비 조정 */
+    margin-left: 5px; /* 좌측 여백 */
+    margin-right: 5px; /* 우측 여백 */
+  }
+
+  .examtable th,
+  .examtable td {
+    font-size: 10px; /* 작은 화면에서 폰트 크기 조정 */
+  }
 }

@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .community_real {
   text-align: center;
   padding: 20px;
@@ -103,4 +106,55 @@ textarea:hover {
 
 .comment_button:active {
   background-color: #008bb3; /* 클릭 시 버튼 배경 색상 */
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+  textarea {
+    height: 400px; /* 아이패드 크기에 맞게 높이 조정 */
+  }
+
+  .posts_list {
+    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개씩 */
+  }
+}
+
+@media (max-width: 768px) {
+  textarea {
+    height: 300px; /* 작은 화면 크기에 맞게 높이 조정 */
+  }
+
+  .posts_list {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개씩 */
+  }
+
+  .post_real_button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .comment_button {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  textarea {
+    height: 200px; /* 더 작은 화면 크기에 맞게 높이 조정 */
+  }
+
+  .posts_list {
+    grid-template-columns: 1fr; /* 한 줄에 1개씩 */
+  }
+
+  .post_real_button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .comment_button {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
 }
