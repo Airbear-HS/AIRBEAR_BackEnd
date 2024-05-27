@@ -110,7 +110,7 @@ function Mypage_real() {
                         className="profile-image"
                     />
                     <h2>{userName} 님</h2>
-                    <p>에어베어와 함께 한지 12 일</p>
+                    <p>에어베어와 오늘도 열심히 하곰</p>
                 </div>
 
                 <div className="mypage_intro">

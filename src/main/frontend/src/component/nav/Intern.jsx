@@ -51,7 +51,7 @@ function Intern() {
               <td>~6/23</td>
               <td>
                 <a href="https://koreanair.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=163240">
-                  [대한항공] 2023년 하반기 신입 인턴 객실승무원 모집
+                  대한항공 2023년 하반기 신입 인턴 객실승무원 모집
                 </a>
               </td>
             </tr>

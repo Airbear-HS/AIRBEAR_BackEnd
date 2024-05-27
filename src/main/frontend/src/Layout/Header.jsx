@@ -118,7 +118,8 @@ function Header() {
           <Link to="/" style={{ textDecoration: 'none' }}>
             <p
               style={{
-                fontSize: 40,
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '40px',
                 fontWeight: 800,
                 textAlign: 'left',
                 color: '#00d8ff',

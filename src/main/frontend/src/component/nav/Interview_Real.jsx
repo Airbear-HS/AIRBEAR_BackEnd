@@ -12,6 +12,7 @@ const Interview_Real = () => {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const [recordButtonClicked, setRecordButtonClicked] = useState(false)
+  const synthRef = useRef(window.speechSynthesis);
 
   useEffect(() => {
     const storedQuestions = JSON.parse(localStorage.getItem('questions'));
@@ -24,6 +25,12 @@ const Interview_Real = () => {
 
   useEffect(() => {
     setIsTextVisible(false);
+    if (question) {
+      const timer = setTimeout(() => {
+        speakQuestion(question);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
   }, [question]);
 
   const fetchAnswersForAllQuestions = async (questions) => {
@@ -118,6 +125,14 @@ const Interview_Real = () => {
   const playRecording = () => {
     const audio = new Audio(audioUrl);
     audio.play();
+  };
+
+  const speakQuestion = (text) => {
+    if (synthRef.current.speaking) {
+      synthRef.current.cancel();
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    synthRef.current.speak(utterance);
   };
 
   return (
