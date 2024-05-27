@@ -134,3 +134,144 @@
   margin-top: 1px;
   margin-right: 400px;
 }
+
+ .fc {
+   background-color: #ffffff; /* 전체 캘린더 배경 색상 */
+   border-radius: 15px;
+   padding: 10px;
+   width: 850px; /* 캘린더 너비 고정 */
+   height: 600px; /* 캘린더 높이 고정 */
+   margin-left: 0;
+   overflow: hidden; /* 스크롤 제거 */
+ }
+
+.fc .fc-toolbar {
+  background-color: #00d8ff; /* 툴바 배경 색상 */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.fc .fc-toolbar-title {
+  color: #ffffff; /* 타이틀 글자 색상 */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fc .fc-button {
+  background-color: #00a6cc; /* 버튼 배경 색상 */
+  color: #ffffff; /* 버튼 글자 색상 */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.fc .fc-button:hover {
+  background-color: #008bb3; /* 호버 시 버튼 배경 색상 */
+}
+
+.fc .fc-button:active {
+  background-color: #007299; /* 클릭 시 버튼 배경 색상 */
+}
+
+.fc .fc-button-primary {
+  background-color: #00a6cc;
+  color: #ffffff;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: #008bb3;
+}
+
+.fc .fc-button-primary:active {
+  background-color: #007299;
+}
+
+.fc .fc-daygrid-day {
+  border: 2px solid #00d8ff; /* 그리드 경계 색상 */
+  background-color: #fffff;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #00d8ff;
+  font-weight: 800;/* 날짜 숫자 색상 */
+  font-size: 15px;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: #00d8ff; /* 요일 글씨 색상 */
+  font-weight: 800;/* 날짜 숫자 색상 */
+  font-size: 18px;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #2310FF; /* 오늘 날짜 배경 색상 */
+}
+
+.fc .fc-daygrid-event {
+  background-color: #00d8ff; /* 이벤트 배경 색상 */
+  color: #ffffff; /* 이벤트 글자 색상 */
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.checklist-container {
+  background-color: #ffffff; /* 전체 캘린더 배경 색상 */
+  border-radius: 15px;
+  padding: 10px;
+  width: 800px; /* 캘린더 너비 고정 */
+  height: 600px; /* 캘린더 높이 고정 */
+  margin-left: 0;
+  overflow: hidden; /* 스크롤 제거 */
+}
+
+.checklist-container h2 {
+  margin-bottom: 10px;
+  color: #00d8ff;
+}
+
+.checklist-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.checklist-container li {
+  margin-bottom: 10px;
+}
+
+.checklist-container li {
+  margin-bottom: 10px;
+  color: #000F75; /* 항목 글자색 변경 */
+  font-weight: 500;
+}
+
+.checklist-container input {
+  width: 500px; /* 캘린더 너비 고정 */
+  height: 30px;
+    padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+}
+
+.checklist-container button {
+  padding: 5px 10px;
+  background-color: #00d8ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checklist-container button:hover {
+  background-color: #00a6cc;
+}

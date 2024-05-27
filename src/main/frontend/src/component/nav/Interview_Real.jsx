@@ -1,13 +1,41 @@
-import React from 'react';
-import './Interview.css'; // CSS 파일을 가져옴
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import './Interview_Real.css';
 
-const Card = ({ questionIds, hashtags }) => {
-  const navigate = useNavigate();
+const Interview_Real = () => {
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [question, setQuestion] = useState('');
+  const [questionId, setQuestionId] = useState('');
+  const [answers, setAnswers] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioUrl, setAudioUrl] = useState('');
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+  const synthRef = useRef(window.speechSynthesis);
 
-  const handleLinkClick = async (questionIds) => {
+  useEffect(() => {
+    const storedQuestions = JSON.parse(localStorage.getItem('questions'));
+    if (storedQuestions && storedQuestions.length > 0) {
+      setQuestion(storedQuestions[currentQuestionIndex].question);
+      setQuestionId(storedQuestions[currentQuestionIndex].questionId);
+      fetchAnswersForAllQuestions(storedQuestions);
+    }
+  }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    setIsTextVisible(false);
+    if (question) {
+      const timer = setTimeout(() => {
+        speakQuestion(question);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [question]);
+
+  const fetchAnswersForAllQuestions = async (questions) => {
+    const questionIds = questions.map(q => q.questionId);
     try {
-      const response = await fetch(`http://localhost:8080/interview`, {
+      const response = await fetch('/api/answers/batch', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -15,110 +43,236 @@ const Card = ({ questionIds, hashtags }) => {
         body: JSON.stringify({ questionIds })
       });
       const data = await response.json();
-      localStorage.setItem('questions', JSON.stringify(data));
-      navigate('/Interview_Real');
+      const answersMap = {};
+      data.forEach(answer => {
+        answersMap[answer.questionId] = answer.best_answer;
+      });
+      localStorage.setItem('best_answers', JSON.stringify(answersMap));
+      setAnswers(data);
     } catch (error) {
-      console.error('Error fetching questions:', error);
+      console.error('Error fetching answers:', error);
     }
   };
 
+  const toggleTextVisibility = () => {
+    setIsTextVisible(!isTextVisible);
+  };
+
+  const handleNextQuestion = () => {
+    const storedQuestions = JSON.parse(localStorage.getItem('questions'));
+    if (storedQuestions && currentQuestionIndex < storedQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setQuestion(storedQuestions[currentQuestionIndex + 1].question);
+      setQuestionId(storedQuestions[currentQuestionIndex + 1].questionId);
+    }
+  };
+
+  const currentAnswer = answers.find(answer => answer.questionId === questionId);
+
+  const startRecording = () => {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          mediaRecorderRef.current = new MediaRecorder(stream);
+          mediaRecorderRef.current.ondataavailable = event => {
+            audioChunksRef.current.push(event.data);
+          };
+          mediaRecorderRef.current.start();
+          setIsRecording(true);
+        })
+        .catch(error => console.error('Error accessing microphone:', error));
+  };
+
+  const handleRecordingButtonClick = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
+  const stopRecording = () => {
+    mediaRecorderRef.current.stop();
+    mediaRecorderRef.current.onstop = () => {
+      const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+      const formData = new FormData();
+      const userId = localStorage.getItem('userId');
+      formData.append('file', audioBlob, 'recording.wav');
+      formData.append('questionId', questionId);
+      formData.append('userId', userId);
+      formData.append('question', question);
+
+      fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log('File uploaded successfully:', data);
+            setAudioUrl(data.audioUrl);
+          })
+          .catch(error => console.error('Error uploading file:', error));
+
+      audioChunksRef.current = [];
+      setIsRecording(false);
+    };
+  };
+
+  const playRecording = () => {
+    const audio = new Audio(audioUrl);
+    audio.play();
+  };
+
+  const speakQuestion = (text) => {
+    if (synthRef.current.speaking) {
+      synthRef.current.cancel();
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    synthRef.current.speak(utterance);
+  };
+
   return (
-      <div className="card">
-        {hashtags.map((tag, index) => (
-            <div
-                key={index}
-                className="tag"
-                onClick={() => handleLinkClick(tag.questionIds)}
+      <div className="Personal">
+        <div className="Personal-container">
+          <div className="questions">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
             >
-              {tag.content}
+              <path
+                  d="M30 5.625C25.1791 5.625 20.4664 7.05457 16.458 9.73293C12.4495 12.4113 9.32533 16.2181 7.48045 20.6721C5.63556 25.126 5.15285 30.027 6.09337 34.7553C7.03388 39.4836 9.35538 43.8268 12.7643 47.2357C16.1732 50.6446 20.5164 52.9661 25.2447 53.9066C29.973 54.8472 34.874 54.3644 39.3279 52.5196C43.7819 50.6747 47.5887 47.5505 50.2671 43.542C52.9454 39.5336 54.375 34.8209 54.375 30C54.3682 23.5374 51.7979 17.3415 47.2282 12.7718C42.6585 8.20209 36.4626 5.63182 30 5.625ZM30 45C29.4438 45 28.9 44.835 28.4375 44.526C27.975 44.217 27.6145 43.7777 27.4016 43.2638C27.1887 42.7499 27.133 42.1844 27.2416 41.6388C27.3501 41.0932 27.6179 40.5921 28.0113 40.1988C28.4046 39.8054 28.9057 39.5376 29.4513 39.429C29.9969 39.3205 30.5624 39.3762 31.0763 39.5891C31.5902 39.802 32.0295 40.1624 32.3385 40.625C32.6476 41.0875 32.8125 41.6312 32.8125 42.1875C32.8125 42.9334 32.5162 43.6488 31.9887 44.1762C31.4613 44.7037 30.7459 45 30 45ZM31.875 33.5812V33.75C31.875 34.2473 31.6775 34.7242 31.3258 35.0758C30.9742 35.4275 30.4973 35.625 30 35.625C29.5027 35.625 29.0258 35.4275 28.6742 35.0758C28.3226 34.7242 28.125 34.2473 28.125 33.75V31.875C28.125 31.3777 28.3226 30.9008 28.6742 30.5492C29.0258 30.1975 29.5027 30 30 30C33.1008 30 35.625 27.8906 35.625 25.3125C35.625 22.7344 33.1008 20.625 30 20.625C26.8992 20.625 24.375 22.7344 24.375 25.3125V26.25C24.375 26.7473 24.1775 27.2242 23.8258 27.5758C23.4742 27.9275 22.9973 28.125 22.5 28.125C22.0027 28.125 21.5258 27.9275 21.1742 27.5758C20.8226 27.2242 20.625 26.7473 20.625 26.25V25.3125C20.625 20.6602 24.8297 16.875 30 16.875C35.1703 16.875 39.375 20.6602 39.375 25.3125C39.375 29.3859 36.15 32.7961 31.875 33.5812Z"
+                  fill="#00D8FF"
+              />
+            </svg>
+            <h2>{question}</h2>
+          </div>
+          <div className="answer-button" onClick={toggleTextVisibility}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 100 100"
+                fill="none"
+            >
+              <path
+                  d="M49.9999 70.8335C54.4202 70.8335 58.6594 69.0776 61.785 65.9519C64.9106 62.8263 66.6665 58.5871 66.6665 54.1668H58.3332C58.3332 56.377 57.4552 58.4966 55.8924 60.0594C54.3296 61.6222 52.21 62.5002 49.9999 62.5002C47.7897 62.5002 45.6701 61.6222 44.1073 60.0594C42.5445 58.4966 41.6665 56.377 41.6665 54.1668H33.3332C33.3332 58.5871 35.0892 62.8263 38.2148 65.9519C41.3404 69.0776 45.5796 70.8335 49.9999 70.8335ZM27.0832 8.3335C23.2623 8.33366 19.5327 9.50113 16.3937 11.6796C13.2547 13.858 10.8562 16.9435 9.51924 20.5229C8.18231 24.1022 7.97082 28.0045 8.91308 31.7074C9.85534 35.4103 11.9064 38.7369 14.7915 41.2418C12.7149 46.9088 12.0368 52.9932 12.8148 58.9783C13.5928 64.9634 15.8039 70.6723 19.2603 75.62C22.7167 80.5677 27.3163 84.6081 32.6683 87.3979C38.0202 90.1876 43.9665 91.6444 50.002 91.6444C56.0374 91.6444 61.9837 90.1876 67.3357 87.3979C72.6877 84.6081 77.2872 80.5677 80.7436 75.62C84.2 70.6723 86.4111 64.9634 87.1891 58.9783C87.9671 52.9932 87.289 46.9088 85.2124 41.2418C87.2542 39.4683 88.8882 37.2741 90.0023 34.8097C91.1163 32.3453 91.6841 29.6691 91.6666 26.9646C91.649 24.2601 91.0466 21.5915 89.9007 19.1417C88.7548 16.692 87.0925 14.5191 85.0279 12.7722C82.9632 11.0253 80.5451 9.74574 77.9394 9.02129C75.3338 8.29684 72.6022 8.14466 69.9322 8.57519C67.2621 9.00572 64.7168 10.0088 62.4709 11.5155C60.225 13.0222 58.3316 14.997 56.9207 17.3043C52.3478 16.4502 47.6562 16.4502 43.0832 17.3043C41.4092 14.5627 39.0583 12.2976 36.2563 10.7266C33.4544 9.15561 30.2955 8.33152 27.0832 8.3335ZM16.6665 27.0835C16.663 24.6303 17.5254 22.2546 19.1018 20.3749C20.6782 18.4952 22.8674 17.2322 25.2837 16.8084C27.7 16.3846 30.1883 16.8272 32.3103 18.0583C34.4323 19.2893 36.0517 21.2297 36.8832 23.5377L38.2082 27.196L41.9499 26.1252C44.5676 25.3765 47.2772 24.9978 49.9999 25.0002C52.7999 25.0002 55.4999 25.3918 58.0499 26.1252L61.7915 27.196L63.1165 23.5377C63.6887 21.9576 64.6344 20.5393 65.8732 19.4037C67.1119 18.2682 68.607 17.449 70.2307 17.0162C71.8545 16.5834 73.5589 16.5496 75.1985 16.9179C76.8382 17.2862 78.3644 18.0455 79.6471 19.1311C80.9298 20.2168 81.931 21.5966 82.5652 23.1528C83.1993 24.709 83.4478 26.3955 83.2892 28.0685C83.1307 29.7415 82.5699 31.3513 81.6547 32.7607C80.7395 34.1701 79.497 35.3373 78.0332 36.1627L74.6415 38.0793L76.3249 41.5877C78.4466 46.0336 79.4076 50.9445 79.1183 55.8622C78.829 60.7799 77.2989 65.5443 74.6706 69.7108C72.0423 73.8773 68.4015 77.3102 64.0878 79.6893C59.7742 82.0684 54.9282 83.3161 50.002 83.3161C45.0757 83.3161 40.2298 82.0684 35.9161 79.6893C31.6024 77.3102 27.9617 73.8773 25.3334 69.7108C22.7051 65.5443 21.1749 60.7799 20.8856 55.8622C20.5963 50.9445 21.5574 46.0336 23.679 41.5877L25.3582 38.0752L21.9665 36.1585C20.3577 35.2517 19.019 33.9334 18.0876 32.3387C17.1563 30.744 16.6658 28.9303 16.6665 27.0835Z"
+                  fill="#00D8FF"
+              />
+            </svg>
+          </div>
+
+          {/* 텍스트가 보이면 표시되는 부분 */}
+          {isTextVisible && currentAnswer && (
+              <div>
+                <p
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Inter',
+                      fontSize: '20px',
+                      fontStyle: 'normal',
+                      fontWeight: 800,
+                      lineHeight: 'normal',
+                    }}
+                >
+                  {currentAnswer.best_answer.split('\n').map((paragraph, index) => (
+                      <React.Fragment key={index}>
+                        {paragraph}
+                        <br/>
+                      </React.Fragment>
+                  ))}
+                </p>
+              </div>
+          )}
+          <div className="record_button" onClick={handleRecordingButtonClick}>
+            {isRecording ? (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="100"
+                    viewBox="0 0 100 100"
+                    fill="none"
+                >
+                  <g clip-path="url(#clip0_412_9)">
+                    <path
+                        d="M50 12.5C51.0206 12.5001 52.0056 12.8748 52.7682 13.553C53.5309 14.2311 54.0181 15.1656 54.1375 16.1792L54.1667 16.6667V83.3333C54.1655 84.3953 53.7588 85.4168 53.0298 86.189C52.3008 86.9613 51.3044 87.426 50.2442 87.4882C49.184 87.5504 48.1401 87.2055 47.3257 86.5239C46.5113 85.8423 45.9879 84.8754 45.8625 83.8208L45.8333 83.3333V16.6667C45.8333 15.5616 46.2723 14.5018 47.0537 13.7204C47.8351 12.939 48.8949 12.5 50 12.5ZM33.3333 25C34.4384 25 35.4982 25.439 36.2796 26.2204C37.061 27.0018 37.5 28.0616 37.5 29.1667V70.8333C37.5 71.9384 37.061 72.9982 36.2796 73.7796C35.4982 74.561 34.4384 75 33.3333 75C32.2283 75 31.1685 74.561 30.3871 73.7796C29.6057 72.9982 29.1667 71.9384 29.1667 70.8333V29.1667C29.1667 28.0616 29.6057 27.0018 30.3871 26.2204C31.1685 25.439 32.2283 25 33.3333 25ZM66.6667 25C67.7717 25 68.8315 25.439 69.6129 26.2204C70.3943 27.0018 70.8333 28.0616 70.8333 29.1667V70.8333C70.8333 71.9384 70.3943 72.9982 69.6129 73.7796C68.8315 74.561 67.7717 75 66.6667 75C65.5616 75 64.5018 74.561 63.7204 73.7796C62.939 72.9982 62.5 71.9384 62.5 70.8333V29.1667C62.5 28.0616 62.939 27.0018 63.7204 26.2204C64.5018 25.439 65.5616 25 66.6667 25ZM16.6667 37.5C17.7717 37.5 18.8315 37.939 19.6129 38.7204C20.3943 39.5018 20.8333 40.5616 20.8333 41.6667V58.3333C20.8333 59.4384 20.3943 60.4982 19.6129 61.2796C18.8315 62.061 17.7717 62.5 16.6667 62.5C15.5616 62.5 14.5018 62.061 13.7204 61.2796C12.939 60.4982 12.5 59.4384 12.5 58.3333V41.6667C12.5 40.5616 12.939 39.5018 13.7204 38.7204C14.5018 37.939 15.5616 37.5 16.6667 37.5ZM83.3333 37.5C84.3539 37.5001 85.3389 37.8748 86.1015 38.553C86.8642 39.2311 87.3514 40.1656 87.4708 41.1792L87.5 41.6667V58.3333C87.4988 59.3953 87.0922 60.4168 86.3631 61.189C85.6341 61.9613 84.6377 62.426 83.5775 62.4882C82.5173 62.5505 81.4734 62.2055 80.659 61.5239C79.8446 60.8423 79.3213 59.8754 79.1958 58.8208L79.1667 58.3333V41.6667C79.1667 40.5616 79.6056 39.5018 80.387 38.7204C81.1685 37.939 82.2283 37.5 83.3333 37.5Z"
+                        fill="#00D8FF"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_412_9">
+                      <rect width="100" height="100" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+            ) : (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100"
+                    height="100"
+                    viewBox="0 0 100 100"
+                    fill="none"
+                >
+                  <path
+                      d="M30.3574 23.2143C30.3574 18.9518 32.0507 14.864 35.0646 11.85C38.0786 8.83606 42.1664 7.14282 46.4289 7.14282C50.6913 7.14282 54.7791 8.83606 57.7931 11.85C60.807 14.864 62.5003 18.9518 62.5003 23.2143V48.6571C60.5996 49.4878 58.8018 50.5365 57.1431 51.7821V23.2143C57.1431 20.3726 56.0143 17.6474 54.005 15.6381C51.9957 13.6288 49.2705 12.5 46.4289 12.5C43.5872 12.5 40.862 13.6288 38.8527 15.6381C36.8434 17.6474 35.7146 20.3726 35.7146 23.2143V51.7857C35.7142 53.3919 36.0751 54.9776 36.7703 56.4256C37.4656 57.8735 38.4775 59.1466 39.7312 60.1507C40.9849 61.1548 42.4484 61.8641 44.0132 62.2262C45.5781 62.5884 47.2044 62.594 48.7717 62.2428C47.965 64.0397 47.359 65.9202 46.9646 67.85L46.4289 67.8571C42.1664 67.8571 38.0786 66.1639 35.0646 63.1499C32.0507 60.1359 30.3574 56.0481 30.3574 51.7857V23.2143ZM46.486 75H46.4289C40.272 75 34.3674 72.5542 30.0139 68.2007C25.6603 63.8471 23.2146 57.9425 23.2146 51.7857V49.1071C23.2146 48.3967 22.9324 47.7154 22.43 47.2131C21.9277 46.7107 21.2464 46.4285 20.536 46.4285C19.8256 46.4285 19.1443 46.7107 18.642 47.2131C18.1396 47.7154 17.8574 48.3967 17.8574 49.1071V51.7857C17.8572 58.8997 20.511 65.758 25.2997 71.0189C30.0884 76.2799 36.6676 79.5652 43.7503 80.2321V90.1785C43.7503 90.8889 44.0325 91.5702 44.5348 92.0726C45.0371 92.5749 45.7184 92.8571 46.4289 92.8571C47.1393 92.8571 47.8206 92.5749 48.3229 92.0726C48.8252 91.5702 49.1074 90.8889 49.1074 90.1785V84.9035C47.6046 81.8018 46.7145 78.4391 46.486 75ZM73.2146 91.0714C68.4786 91.0714 63.9365 89.19 60.5877 85.8412C57.2388 82.4923 55.3574 77.9503 55.3574 73.2143C55.3574 68.4782 57.2388 63.9362 60.5877 60.5873C63.9365 57.2385 68.4786 55.3571 73.2146 55.3571C77.9506 55.3571 82.4926 57.2385 85.8415 60.5873C89.1903 63.9362 91.0717 68.4782 91.0717 73.2143C91.0717 77.9503 89.1903 82.4923 85.8415 85.8412C82.4926 89.19 77.9506 91.0714 73.2146 91.0714ZM73.2146 96.4285C79.3714 96.4285 85.276 93.9827 89.6295 89.6292C93.9831 85.2757 96.4288 79.3711 96.4288 73.2143C96.4288 67.0574 93.9831 61.1528 89.6295 56.7993C85.276 52.4457 79.3714 50 73.2146 50C67.0578 50 61.1531 52.4457 56.7996 56.7993C52.4461 61.1528 50.0003 67.0574 50.0003 73.2143C50.0003 79.3711 52.4461 85.2757 56.7996 89.6292C61.1531 93.9827 67.0578 96.4285 73.2146 96.4285ZM73.2146 85.7143C76.5298 85.7143 79.7092 84.3973 82.0534 82.0531C84.3976 79.7089 85.7146 76.5295 85.7146 73.2143C85.7146 69.899 84.3976 66.7196 82.0534 64.3754C79.7092 62.0312 76.5298 60.7143 73.2146 60.7143C69.8994 60.7143 66.7199 62.0312 64.3757 64.3754C62.0315 66.7196 60.7146 69.899 60.7146 73.2143C60.7146 76.5295 62.0315 79.7089 64.3757 82.0531C66.7199 84.3973 69.8994 85.7143 73.2146 85.7143Z"
+                      fill="#00D8FF"
+                  />
+                </svg>
+            )}
+          </div>
+
+          <div className="recordcheck_button" onClick={playRecording}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 100 100"
+                fill="none"
+            >
+              <path
+                  d="M59.3753 49.9999C59.3753 48.066 60.1435 46.2114 61.511 44.8439C62.8785 43.4765 64.7331 42.7083 66.667 42.7083C68.6009 42.7083 70.4555 43.4765 71.823 44.8439C73.1904 46.2114 73.9587 48.066 73.9587 49.9999C73.9587 51.9338 73.1904 53.7885 71.823 55.1559C70.4555 56.5234 68.6009 57.2916 66.667 57.2916C64.7331 57.2916 62.8785 56.5234 61.511 55.1559C60.1435 53.7885 59.3753 51.9338 59.3753 49.9999ZM33.3337 57.2916C35.2675 57.2916 37.1222 56.5234 38.4896 55.1559C39.8571 53.7885 40.6253 51.9338 40.6253 49.9999C40.6253 48.066 39.8571 46.2114 38.4896 44.8439C37.1222 43.4765 35.2675 42.7083 33.3337 42.7083C31.3998 42.7083 29.5451 43.4765 28.1777 44.8439C26.8102 46.2114 26.042 48.066 26.042 49.9999C26.042 51.9338 26.8102 53.7885 28.1777 55.1559C29.5451 56.5234 31.3998 57.2916 33.3337 57.2916Z"
+                  fill="#00D8FF"
+              />
+              <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M14.433 14.4333C8.33301 20.5416 8.33301 30.3583 8.33301 49.9999C8.33301 69.6416 8.33301 79.4624 14.433 85.5624C20.5413 91.6666 30.358 91.6666 49.9997 91.6666C69.6413 91.6666 79.4622 91.6666 85.5622 85.5624C91.6663 79.4666 91.6663 69.6416 91.6663 49.9999C91.6663 30.3583 91.6663 20.5374 85.5622 14.4333C79.4663 8.33325 69.6413 8.33325 49.9997 8.33325C30.358 8.33325 20.5372 8.33325 14.433 14.4333ZM55.2538 57.2916C53.6348 54.7579 52.905 51.7574 53.1797 48.7631C53.4543 45.7688 54.7177 42.9511 56.7706 40.7542C58.8235 38.5573 61.5493 37.1061 64.5181 36.6295C67.4869 36.1528 70.5299 36.6778 73.1674 38.1217C75.8049 39.5656 77.8868 41.8462 79.0849 44.604C80.283 47.3618 80.5292 50.44 79.7847 53.3532C79.0401 56.2663 77.3471 58.8489 74.9727 60.6936C72.5982 62.5383 69.6773 63.5403 66.6705 63.5416H33.3288C30.322 63.5403 27.4011 62.5383 25.0267 60.6936C22.6522 58.8489 20.9593 56.2663 20.2147 53.3532C19.4701 50.44 19.7163 47.3618 20.9144 44.604C22.1126 41.8462 24.1945 39.5656 26.8319 38.1217C29.4694 36.6778 32.5124 36.1528 35.4812 36.6295C38.4501 37.1061 41.1758 38.5573 43.2287 40.7542C45.2817 42.9511 46.5451 45.7688 46.8197 48.7631C47.0943 51.7574 46.3646 54.7579 44.7455 57.2916H55.2538Z"
+                  fill="#00D8FF"
+              />
+            </svg>
+          </div>
+          <div className='record_pause'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+              <g clip-path="url(#clip0_428_2)">
+                <path d="M14.6499 85.35C9.8744 80.7376 6.06529 75.2204 3.44484 69.1202C0.824388 63.02 -0.554923 56.459 -0.612614 49.82C-0.670305 43.1811 0.59478 36.5971 3.10882 30.4523C5.62287 24.3075 9.33552 18.7249 14.0302 14.0302C18.7248 9.33559 24.3074 5.62293 30.4522 3.10889C36.597 0.594841 43.181 -0.670244 49.82 -0.612553C56.4589 -0.554862 63.0199 0.824449 69.1201 3.4449C75.2203 6.06535 80.7376 9.87446 85.3499 14.65C94.4578 24.0801 99.4975 36.7102 99.3836 49.82C99.2697 62.9299 94.0112 75.4705 84.7408 84.7409C75.4704 94.0113 62.9298 99.2697 49.82 99.3837C36.7101 99.4976 24.08 94.4579 14.6499 85.35ZM34.9999 30V70H44.9999V30H34.9999ZM54.9999 30V70H64.9999V30H54.9999Z" fill="#00D8FF"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_428_2">
+                  <rect width="100" height="100" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        {currentQuestionIndex < JSON.parse(localStorage.getItem('questions')).length - 1 && (
+            <div className="next_q_button" onClick={handleNextQuestion}>
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100"
+                  height="100"
+                  viewBox="0 0 100 100"
+                  fill="none"
+              >
+                <path
+                    d="M6.25 50C6.25 58.6529 8.81589 67.1115 13.6232 74.3062C18.4305 81.5008 25.2633 87.1084 33.2576 90.4197C41.2519 93.7311 50.0485 94.5975 58.5352 92.9094C67.0219 91.2213 74.8174 87.0545 80.9359 80.9359C87.0545 74.8174 91.2213 67.0219 92.9094 58.5352C94.5975 50.0485 93.7311 41.2519 90.4197 33.2576C87.1084 25.2633 81.5008 18.4305 74.3062 13.6232C67.1115 8.81589 58.6529 6.25 50 6.25C38.3968 6.25 27.2688 10.8594 19.0641 19.0641C10.8594 27.2688 6.25 38.3968 6.25 50ZM25 46.875H62.9687L45.5312 29.3531L50 25L75 50L50 75L45.5312 70.5406L62.9687 53.125H25V46.875Z"
+                    fill="#00D8FF"
+                />
+              </svg>
             </div>
-        ))}
+        )}
       </div>
   );
 };
 
-const Interview = () => {
-  const data = [
-    {
-      hashtags: [
-        { content: <p>Personal Background</p>,},
-        { content: <span>#성격 및 개인적인 경험</span>, questionIds: [100, 101, 102, 103] },
-        { content: <span>#가족과 친구</span>, questionIds: [200, 201, 202, 203] },
-        { content: <span>#집과 동네</span>, questionIds: [300, 301, 302, 303] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>School</p>,},
-        { content: <span>#전공, 부전공</span>, questionIds: [500, 501, 502, 503] },
-        { content: <span>#학교 , 캠퍼스</span>, questionIds: [400, 401, 402, 403] },
-        { content: <span>#과목, 교수, 동문</span>, questionIds: [600, 601, 602, 603] },
-        { content: <span>#동아리와 과외 활동</span>, questionIds: [700, 701, 702, 703] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>Free Time</p>,},
-        { content: <span>#여가 활동, 취미 및 관심사</span>, questionIds: [800, 801, 802, 803] },
-        { content: <span>#스포츠 페이지 공부한 날</span>, questionIds: [900, 901, 902, 903] },
-        { content: <span>#선호하는 것들</span>, questionIds: [1000, 1001, 1002, 1003] },
-        { content: <span>#여행</span>, questionIds: [1100, 1101, 1102, 1103] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>Opinions</p>,},
-        { content: <span>#현황에 관한 의견</span>, questionIds: [1200, 1201, 1202, 1203] },
-        { content: <span>#제시하는 방향</span>, questionIds: [1300, 1301, 1302, 1303] },
-        { content: <span>#장단점, 비교</span>, questionIds: [1400, 1401, 1402, 1403] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>Suitability</p>,},
-        { content: <span>#조직과의 적합성</span>, questionIds: [1500, 1501, 1502, 1503] },
-        { content: <span>#지원 동기</span>, questionIds: [1600, 1601, 1602, 1603] },
-        { content: <span>#업무 경험</span>, questionIds: [1700, 1701, 1702, 1703] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>Qualifications</p>,},
-        { content: <span>#성취</span>, questionIds: [1800, 1801, 1802, 1803] },
-        { content: <span>#교훈</span>, questionIds: [1900, 1901, 1902, 1903] },
-        { content: <span>#문제 해결 능력</span>, questionIds: [2000, 2001, 2002, 2003] },
-        { content: <span>#장단점</span>, questionIds: [2100, 2101, 2102, 2103] },
-        { content: <span>#리더십</span>, questionIds: [2200, 2201, 2202, 2203] },
-        { content: <span>#관점</span>, questionIds: [2300, 2301, 2302, 2303] },
-        { content: <span>#계획과 포부</span>, questionIds: [2400, 2401, 2402, 2403] },
-      ],
-    },
-
-    {
-      hashtags: [
-        { content: <p>Explaining & Asking Questions</p>,},
-        { content: <span>#개념,사물 묘사하기</span>, questionIds: [2500, 2501, 2502, 2503] },
-        { content: <span>#What 설명하기</span>, questionIds: [2600, 2601, 2602, 2603] },
-        { content: <span>#Why 설명하기</span>, questionIds: [2700, 2701, 2702, 2703] },
-        { content: <span>#가상의 질문</span>, questionIds: [2800, 2801, 2802, 2803] },
-        { content: <span>#질문 확인하기</span>, questionIds: [2900, 2901, 2902, 2903] },
-      ],
-    },
-    {
-      hashtags: [
-        { content: <p>Extra</p>,},
-        { content: <span>#면접관에게 질문하기</span>, questionIds: [3000, 3001, 3002, 3003] },
-      ],
-    },
-  ];
-
-  return (
-      <div className="container">
-        {data.map((card, index) => (
-            <Card key={index} questionIds={card.questionIds} hashtags={card.hashtags}/>
-        ))}
-      </div>
-  );
-};
-
-export default Interview;
+export default Interview_Real;

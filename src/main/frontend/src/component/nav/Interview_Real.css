@@ -73,3 +73,13 @@
   flex-shrink: 0;
   margin-bottom: 5px;
 }
+
+.record_pause {
+  width: 30px;
+  height: 15px;
+  position: absolute; /* 절대 위치로 설정 */
+  bottom: 100px;
+  left: 230px;
+  flex-shrink: 0;
+  margin-bottom: 5px;
+}

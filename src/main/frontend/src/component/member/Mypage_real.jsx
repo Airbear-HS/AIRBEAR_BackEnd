@@ -12,6 +12,9 @@ function Mypage_real() {
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState({ date: '', records: [] });
+    const [checklist, setChecklist] = useState([]);
+    const [newItem, setNewItem] = useState('');
+
 
     useEffect(() => {
         axios.get(`/api/audio-files/${userId}`).then((response) => {
@@ -62,6 +65,18 @@ function Mypage_real() {
                 console.error("오디오 파일을 삭제하는 도중 오류가 발생했습니다!", error);
             });
     };
+
+    const handleAddItem = () => {
+        if (newItem.trim()) {
+            setChecklist([...checklist, newItem.trim()]);
+            setNewItem('');
+        }
+    };
+
+    const handleDeleteItem = (index) => {
+        setChecklist(checklist.filter((_, i) => i !== index));
+    };
+
 
     return (
         <div className="page_mine">
@@ -139,17 +154,46 @@ function Mypage_real() {
                     </div>
                 </div>
             </div>
-            <div className="hi-card">
-                <div className="mypage_api">
-                    <FullCalendar
-                        plugins={[dayGridPlugin, interactionPlugin]}
-                        initialView="dayGridMonth"
-                        events={events}
-                        dateClick={handleDateClick}
-                    />
 
+
+            <div className="main-content">
+                <div className="hi-card">
+                    <div className="mypage_api">
+
+                        <FullCalendar
+                            plugins={[dayGridPlugin, interactionPlugin]}
+                            initialView="dayGridMonth"
+                            events={events}
+                            dateClick={handleDateClick}
+                        />
+
+                    </div>
+                </div>
+
+
+                <div className="checklist-container">
+                    <h2>오늘 할 일 ✅</h2>
+                    <ul>
+                        {checklist.map((item, index) => (
+                            <li key={index}>
+                                {item} <button onClick={() => handleDeleteItem(index)}>삭제</button>
+                            </li>
+                        ))}
+                    </ul>
+                    <input
+                        type="text"
+                        value={newItem}
+                        onChange={(e) => setNewItem(e.target.value)}
+                        placeholder="새 항목 추가"
+                    />
+                    <button onClick={handleAddItem}>추가</button>
                 </div>
             </div>
+
+
+
+
+
             {modalOpen && (
                 <div className="modal">
                     <div className="modal-content">
@@ -169,10 +213,12 @@ function Mypage_real() {
                                 </li>
                             ))}
                         </ul>
+
+
                     </div>
                 </div>
             )}
-            <div className="extra-space_api"></div>
+
         </div>
     );
 }
