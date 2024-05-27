@@ -1,7 +1,8 @@
 .tips_2,
 .tips_3 {
+  margin-left: 100px;
   display: flex;
-  margin-left: 0px;
+
   margin-bottom: 20px;
   text-decoration: none;
 }

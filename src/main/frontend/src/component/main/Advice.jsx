@@ -37,7 +37,7 @@ function Advice() {
           src="https://i.pinimg.com/736x/35/93/d9/3593d9d074b9277dbbe35f534bf0ed68.jpg"
           alt="baordingpass"
         ></img>
-        <div className="advice_text_2">
+        <div className="advice_text">
           <h2>여가시간이란?</h2>
           <p>
             외항사 승무원으로 일하면서 여가시간을 효율적으로 활용했습니다.{' '}
@@ -60,7 +60,7 @@ function Advice() {
           src="https://i.pinimg.com/564x/0a/f8/46/0af846de5f91a2c05179e37b67885528.jpg"
           alt="familytrip"
         ></img>
-        <div className="advice_text_3">
+        <div className="advice_text">
           <h2>가족에게 주어지는 복지</h2>
           <p>
             외항사 승무원으로 일하면서 가족과 떨어져 지내는 시간이 많았습니다.

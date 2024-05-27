@@ -4,6 +4,7 @@
   width: 100%; /* 가로로 길게 설정 */
   height: auto; /* 필요에 따라 높이 설정 */
   display: inline-block;
+  margin-left: 100px;
 }
 
 .text_1 {
@@ -13,7 +14,7 @@
   margin-left: 20px; /* 예시로 20px로 수정 */
   transform: translate(0, 0);
   color: white;
-  font-size: 50px;
+  font-size: 45px;
   font-weight: 700;
   width: 70%;
   text-align: left;

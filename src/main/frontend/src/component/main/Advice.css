@@ -5,7 +5,7 @@
   margin-bottom: 140px;
 }
 
-.advice_1 img {
+.advice_1 img, .advice_2 img ,.advice_3 img, .advice_4 img {
   width: 300px;
   height: 422px;
   flex-shrink: 0;
@@ -50,21 +50,9 @@
   margin-bottom: 140px;
 }
 
-.advice_2 img {
-  width: 310px;
-  height: 402px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-left: 30px;
-  margin-top: 50px;
-}
 
-.advice_text_2 {
-  display: flex;
-  flex-direction: column; /* Make vertical direction */
-  margin-left: 30px; /* Adjust margin as needed */
-  margin-bottom: 50px;
-}
+
+
 
 .advice_2 h2 {
   margin-top: 50px;
@@ -95,22 +83,8 @@
   margin-bottom: 140px;
 }
 
-.advice_3 img {
-  width: 300px;
-  height: 390px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-left: 30px;
-  margin-top: 50px;
-  margin-right: 20px;
-}
 
-.advice_text {
-  display: flex;
-  flex-direction: column; /* Make vertical direction */
-  margin-left: 50px; /* Adjust margin as needed */
-  margin-bottom: 50px;
-}
+
 
 .advice_3 h2 {
   margin-top: 50px;
@@ -141,21 +115,7 @@
   margin-bottom: 140px;
 }
 
-.advice_4 img {
-  width: 300px;
-  height: 452px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-left: 30px;
-  margin-top: 50px;
-}
 
-.advice_text {
-  display: flex;
-  flex-direction: column; /* Make vertical direction */
-  margin-left: 30px; /* Adjust margin as needed */
-  margin-bottom: 50px;
-}
 
 .advice_4 h2 {
   margin-top: 50px;

@@ -1,8 +1,9 @@
 .body_container {
+  margin-left: 100px;
   display: flex;
   flex-direction: row; /* 가로 방향 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  width: 1300px;
+  width: 1400px;
   padding: 20px;
 
   border-radius: 99px;
@@ -22,6 +23,7 @@
   flex-direction: column; /* 아이템들을 세로로 정렬 */
   align-items: flex-start; /* 왼쪽 정렬 */
   background-color: #fff;
+  margin-bottom: 10px;
 }
 
 .item {

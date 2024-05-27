@@ -75,11 +75,11 @@
 }
 
 .record_pause {
-  width: 30px;
-  height: 15px;
+  width: 25px;
+  height: 10px;
   position: absolute; /* 절대 위치로 설정 */
-  bottom: 100px;
-  left: 230px;
+  bottom: 97px;
+  left: 280px;
   flex-shrink: 0;
   margin-bottom: 5px;
 }
