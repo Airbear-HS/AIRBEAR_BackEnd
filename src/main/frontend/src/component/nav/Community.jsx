@@ -166,6 +166,8 @@ function Community() {
             삭제하기
           </button>
         </div>
+
+
         <div className="posts_list">
           {posts.length > 0 ? (
               posts.map((post) => (
@@ -183,9 +185,14 @@ function Community() {
                                   댓글 삭제
                                 </button>
                               </div>
+
+
                           ))}
                       <CommentInput onAddComment={(comment) => handleAddComment(post.id, comment)} />
                     </div>
+
+
+
                   </div>
               ))
           ) : (

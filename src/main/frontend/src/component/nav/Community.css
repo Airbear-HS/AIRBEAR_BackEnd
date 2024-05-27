@@ -43,15 +43,20 @@ textarea:hover {
 }
 
 .posts_list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개씩 */
+  gap: 20px; /* 항목 간 간격 */
   margin-top: 30px;
 }
 
 .post_item {
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #00d8ff;
+  border: 3px solid #00d8ff;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .comment_section {
@@ -62,7 +67,7 @@ textarea:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #fffff;
+  border-top: 1px solid #B2EBF4;
   padding: 5px 0;
 }
 

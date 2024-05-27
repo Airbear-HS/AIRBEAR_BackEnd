@@ -6,7 +6,7 @@ function Advice() {
     <>
       <div className="advice_1">
         <img
-          src="https://i.pinimg.com/564x/a4/11/d7/a411d77f8a03ad08464aef1bfd0591b7.jpg"
+          src="https://i.pinimg.com/564x/fe/08/f2/fe08f2794802f73148646d792e9961b9.jpg"
           alt="windowpane"
         ></img>
         <div className="advice_text">
@@ -34,7 +34,7 @@ function Advice() {
 
       <div className="advice_2">
         <img
-          src="https://i.pinimg.com/564x/fc/ea/f6/fceaf6da6658f72bffc103a00419e233.jpg"
+          src="https://i.pinimg.com/736x/35/93/d9/3593d9d074b9277dbbe35f534bf0ed68.jpg"
           alt="baordingpass"
         ></img>
         <div className="advice_text_2">
@@ -57,7 +57,7 @@ function Advice() {
 
       <div className="advice_3">
         <img
-          src="https://i.pinimg.com/564x/94/e1/b9/94e1b93783f644fd2a7bb99a1f5285f6.jpg"
+          src="https://i.pinimg.com/564x/0a/f8/46/0af846de5f91a2c05179e37b67885528.jpg"
           alt="familytrip"
         ></img>
         <div className="advice_text_3">
@@ -81,7 +81,7 @@ function Advice() {
 
       <div className="advice_4">
         <img
-          src="https://i.pinimg.com/564x/e6/02/a8/e602a8865e8f6712607092c23e2d2bc3.jpg"
+          src="https://i.pinimg.com/564x/43/f4/8d/43f48d46c865dacc5f466154214ab3a6.jpg"
           alt="world"
         ></img>
         <div className="advice_text">
