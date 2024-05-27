@@ -8,7 +8,7 @@ function Neck() {
         alt="airplane"
         src="https://wallpapersmug.com/download/3840x2400/7c3c4d/buildings-facade-aeroplane.jpg"
         style={{
-          width: 1500,
+          width: 1450,
           height: 450,
           borderRadius: 50,
           objectFit: 'cover',

@@ -4,6 +4,7 @@ import './Health.css';
 function Health() {
   return (
     <>
+        <div className="workout-container">
       <div className="workout_1">
         <h2>🧘🏻‍♀️승무원 취준으로 아픈 허리! 에어베어와 함께 이겨내자!</h2>
         <a href="https://youtu.be/QhRcs9d2Y9E?si=6tGJOqOxybdpwSmN">
@@ -24,7 +25,7 @@ function Health() {
 
       <div className="workoutone">
         <img
-          src="https://i.pinimg.com/564x/e3/4d/b1/e34db149baa78b6df4b591c8630169f0.jpg"
+          src="https://i.pinimg.com/564x/4c/75/70/4c75703236ecda2b203e6e184f3c2a1e.jpg"
           alt="Workout"
         />
       </div>
@@ -49,7 +50,7 @@ function Health() {
 
       <div className="workouttwo">
         <img
-          src="https://i.pinimg.com/564x/02/d9/fc/02d9fc58183e51bc6485f286562f6ee7.jpg"
+          src="https://i.pinimg.com/564x/05/ab/0f/05ab0f05c8ee639d23050a48d29fa67f.jpg"
           alt="Workouttwo"
         />
       </div>
@@ -74,7 +75,7 @@ function Health() {
 
       <div className="workoutthree">
         <img
-          src="https://i.pinimg.com/564x/4a/82/40/4a8240c7d195d293d7b7d7b0e5bc5b66.jpg"
+          src="https://i.pinimg.com/564x/d0/e1/48/d0e14865e2a198f1973a572d84e78366.jpg"
           alt="Workoutthree"
         />
       </div>
@@ -99,10 +100,11 @@ function Health() {
 
       <div className="workoutfour">
         <img
-          src="https://i.pinimg.com/736x/c1/51/fc/c151fc86a54ded7afc897cd7ae1111ac.jpg"
+          src="https://i.pinimg.com/564x/16/f4/94/16f4945a7a6f2942ab7e111de330038c.jpg"
           alt="Workout4"
         />
       </div>
+        </div>
     </>
   );
 }

@@ -1,91 +1,48 @@
-.workout_1 h2 {
+.workout-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-left: 50px;
+}
+
+.workout_1, .workout_2, .workout_3, .workout_4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 자식 요소들을 수평 가운데 정렬 */
+  justify-content: center; /* 자식 요소들을 수직 가운데 정렬 */
+  margin-bottom: 30px; /* 각 컨테이너의 아래 여백 */
+}
+
+.workout_1 h2, .workout_2 h2, .workout_3 h2, .workout_4 h2 {
   color: #00d8ff;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
-}
-.workout_1 svg {
-  align-items: center;
-  margin-left: 480px;
+  margin-bottom: 5px; /* 아래 여백 */
 }
 
-.workoutone img {
-  width: 500px;
-  height: 800px;
+.workout_1 svg, .workout_2 svg, .workout_3 svg, .workout_4 svg {
+  margin-top: 10px; /* 위쪽 여백 추가 */
+}
+
+.workoutone img, .workouttwo img, .workoutthree img, .workoutfour img {
+  width: 400px;
+  height: 380px;
   flex-shrink: 0;
   border-radius: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 20px; /* 이미지 아래 여백 */
 }
 
-.workout_2 h2 {
-  align-items: center;
-  margin-left: 50px;
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-.workout_2 svg {
-  align-items: center;
-  margin-left: 480px;
-}
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+  .workout_1 h2, .workout_2 h2, .workout_3 h2, .workout_4 h2 {
+    font-size: 30px; /* 폰트 크기 조정 */
+  }
 
-.workouttwo img {
-  width: 500px;
-  height: 800px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-bottom: 100px;
-}
-
-.workout_3 h2 {
-  align-items: center;
-  margin-left: 50px;
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-.workout_3 svg {
-  align-items: center;
-  margin-left: 360px;
-}
-
-.workoutthree img {
-  width: 600px;
-  height: 800px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-bottom: 100px;
-}
-
-.workout_4 h2 {
-  align-items: center;
-  margin-left: 50px;
-  color: #00d8ff;
-  font-family: Inter;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-.workout_4 svg {
-  align-items: center;
-  margin-left: 360px;
-}
-
-.workoutfour img {
-  width: 500px;
-  height: 800px;
-  flex-shrink: 0;
-  border-radius: 30px;
-  margin-bottom: 100px;
+  .workoutone img, .workouttwo img, .workoutthree img, .workoutfour img {
+    width: 90%; /* 너비를 조정하여 태블릿에 맞춤 */
+    height: auto; /* 높이를 자동으로 조정 */
+    margin-bottom: 30px; /* 아래 여백 조정 */
+  }
 }

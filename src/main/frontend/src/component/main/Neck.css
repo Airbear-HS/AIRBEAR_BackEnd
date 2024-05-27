@@ -33,26 +33,22 @@
 }
 
 @media (max-width: 768px) {
-  .back img{
-    height: auto;
-    max-height: 300px;
-  }
-
   .text_1 {
     font-size: 30px;
-    left: 10px;
     width: 90%;
     padding-bottom: 20px;
+    left: 10px;
   }
 
   .introduce {
     font-size: 20px;
     width: 90%;
     padding: 10px;
+    left: 10px;
     margin-left: 0;
   }
 
   .back {
-    margin-bottom: 200px; /* 모바일에서 여백 조정 */
+    margin-bottom: 200px; /* 태블릿에서 여백 조정 */
   }
 }
