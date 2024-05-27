@@ -11,7 +11,10 @@ const Interview_Real = () => {
   const [audioUrl, setAudioUrl] = useState('');
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
+<<<<<<< HEAD
   const [recordButtonClicked, setRecordButtonClicked] = useState(false)
+=======
+>>>>>>> d4e22d59e1c138354e9d23101320206609d49ed1
   const synthRef = useRef(window.speechSynthesis);
 
   useEffect(() => {
@@ -28,7 +31,11 @@ const Interview_Real = () => {
     if (question) {
       const timer = setTimeout(() => {
         speakQuestion(question);
+<<<<<<< HEAD
       }, 1000);
+=======
+      }, 500);
+>>>>>>> d4e22d59e1c138354e9d23101320206609d49ed1
       return () => clearTimeout(timer);
     }
   }, [question]);
@@ -57,10 +64,6 @@ const Interview_Real = () => {
 
   const toggleTextVisibility = () => {
     setIsTextVisible(!isTextVisible);
-  };
-
-  const toggleRecordButton = () => {
-    setRecordButtonClicked(!recordButtonClicked);
   };
 
   const handleNextQuestion = () => {

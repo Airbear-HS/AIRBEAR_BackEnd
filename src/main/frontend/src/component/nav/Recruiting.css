@@ -1,8 +1,12 @@
 .recruiting-container {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   align-items: center;
   justify-content: flex-start; /* 수직 가운데 정렬 */
+=======
+  align-items: center; /* 수직 가운데 정렬 */
+>>>>>>> d4e22d59e1c138354e9d23101320206609d49ed1
   height: 100vh; /* 전체 화면 높이 */
 }
 
@@ -32,7 +36,6 @@
 }
 
 .recruit_posting {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;

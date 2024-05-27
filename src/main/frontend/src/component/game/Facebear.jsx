@@ -66,31 +66,31 @@ const Facebear = () => {
   };
 
   return (
-    // 컴포넌트의 JSX를 반환합니다.
-    <Section>
-      <Container>
-        <Title>베어와 친구들을 찾아보세요!</Title>
-        <TargetFace>목표 친구 : {targetFace}</TargetFace>{' '}
-        {/* 목표 얼굴을 표시합니다. */}
-        <FacesContainer>
-          {faces.map((face, index) => (
-            <FaceButton
-              key={index}
-              onClick={() => {
-                setSelectedFace(face); // 선택한 얼굴을 설정합니다.
-                checkMatch(face); // 선택한 얼굴이 목표 얼굴과 일치하는지 확인합니다.
-              }}
-              selected={face === selectedFace}
-            >
-              {face}
-            </FaceButton>
-          ))}
-        </FacesContainer>
-        {result && <Result>{result}</Result>} {/* 결과 메시지를 표시합니다. */}
-        <Button onClick={resetGame}>다시 시작</Button>{' '}
-        {/* 게임을 초기화하는 버튼입니다. */}
-      </Container>
-    </Section>
+      // 컴포넌트의 JSX를 반환합니다.
+      <Section>
+        <Container>
+          <Title>베어와 친구들을 찾아보세요!</Title>
+          <TargetFace>목표 친구 : {targetFace}</TargetFace>{' '}
+          {/* 목표 얼굴을 표시합니다. */}
+          <FacesContainer>
+            {faces.map((face, index) => (
+                <FaceButton
+                    key={index}
+                    onClick={() => {
+                      setSelectedFace(face); // 선택한 얼굴을 설정합니다.
+                      checkMatch(face); // 선택한 얼굴이 목표 얼굴과 일치하는지 확인합니다.
+                    }}
+                    selected={face === selectedFace}
+                >
+                  {face}
+                </FaceButton>
+            ))}
+          </FacesContainer>
+          {result && <Result>{result}</Result>} {/* 결과 메시지를 표시합니다. */}
+          <Button onClick={resetGame}>다시 시작</Button>{' '}
+          {/* 게임을 초기화하는 버튼입니다. */}
+        </Container>
+      </Section>
   );
 };
 

@@ -49,6 +49,20 @@ function Mypage_real() {
             });
     };
 
+    const handleDeleteRecord = (recordId) => {
+        axios
+            .delete(`/api/audio-files/${recordId}`)
+            .then(() => {
+                setModalData((prevState) => ({
+                    ...prevState,
+                    records: prevState.records.filter(record => record.id !== recordId)
+                }));
+            })
+            .catch((error) => {
+                console.error("오디오 파일을 삭제하는 도중 오류가 발생했습니다!", error);
+            });
+    };
+
     return (
         <div className="page_mine">
             <header className="mine_header">
@@ -148,9 +162,10 @@ function Mypage_real() {
                                 <li key={index}>
                                     <p>질문: {record.question}</p>
                                     <audio controls>
-                                        <source src={`/api/download/${record.id}`} type="audio/mpeg" />
+                                        <source src={`/api/download/${record.id}`} type="audio/mpeg"/>
                                         브라우저가 오디오 태그를 지원하지 않습니다.
                                     </audio>
+                                    <button onClick={() => handleDeleteRecord(record.id)}>삭제</button>
                                 </li>
                             ))}
                         </ul>
