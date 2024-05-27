@@ -119,7 +119,7 @@ function Mypage_real() {
                         <span>AIRBEAR</span>
                     </div>
                     <img
-                        src="https://s3-alpha-sig.figma.com/img/90b3/5abc/c6fe62cd939afc0d3470f661561d7cc7?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=WgoFWTpqDmwjB58UiH3pgv0H1i~bnvzA~AAP-Im4HrynOC4yIycnuArR2VVk5Z69kQNTrqKoDcbbEHxjpyg1VDL5L~n-Nps1as2vAMs9qhYbMJYXY1fNQ-yXu~kpjBZ1p3Fa78h7xkXa0JVt3tjN3TSHDUS22KYEmHOv7BqSV7J-feMio6kjWz4V7I~Ix7FXZhtDk5JuuuGT~T3MGei1ZLtDw1A2l0ULETamaH35wkJDEwwNa5xFEro2SUQM2cYxnJHsqXO6nVWANajK5dSzxeZmzgXF4EdRVftcIwNgRwiSYvs6XqATYbn5RRV2FRD9xCOkxUltM-H3QLURL1Maeg__"
+                        src="https://i.pinimg.com/236x/dd/50/a5/dd50a50b7d89e91554d6b1cb85fdeb26.jpg"
                         alt="프로필 이미지"
                         className="profile-image"
                     />
