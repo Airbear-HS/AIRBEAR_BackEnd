@@ -12,7 +12,7 @@ function Mypage_real() {
     const [events, setEvents] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState({ date: '', records: [] });
-    const [checklist, setChecklist] = useState([]);
+    const [checklist, setChecklist] = useState(JSON.parse(localStorage.getItem('checklist')) || []);
     const [newItem, setNewItem] = useState('');
 
 
@@ -68,13 +68,17 @@ function Mypage_real() {
 
     const handleAddItem = () => {
         if (newItem.trim()) {
-            setChecklist([...checklist, newItem.trim()]);
+            const updatedChecklist = [...checklist, newItem.trim()];
+            setChecklist(updatedChecklist);
             setNewItem('');
+            localStorage.setItem('checklist', JSON.stringify(updatedChecklist));
         }
     };
 
     const handleDeleteItem = (index) => {
-        setChecklist(checklist.filter((_, i) => i !== index));
+        const updatedChecklist = checklist.filter((_, i) => i !== index);
+        setChecklist(updatedChecklist);
+        localStorage.setItem('checklist', JSON.stringify(updatedChecklist));
     };
 
 
@@ -176,7 +180,8 @@ function Mypage_real() {
                     <ul>
                         {checklist.map((item, index) => (
                             <li key={index}>
-                                {item} <button onClick={() => handleDeleteItem(index)}>삭제</button>
+                                {item}
+                                <button onClick={() => handleDeleteItem(index)}>삭제</button>
                             </li>
                         ))}
                     </ul>
@@ -189,9 +194,6 @@ function Mypage_real() {
                     <button onClick={handleAddItem}>추가</button>
                 </div>
             </div>
-
-
-
 
 
             {modalOpen && (
