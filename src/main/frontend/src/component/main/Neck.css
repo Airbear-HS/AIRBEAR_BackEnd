@@ -1,84 +1,53 @@
-/*쿼리 조정 완료*/
-
-
 .back {
-  position: relative; /* 중복된 position 속성 제거, relative만 유지 */
-  width: 1200px; /* 가로로 길게 설정 */
-  height: auto; /* 필요에 따라 높이 설정 */
+  position: relative;
+  width: 1200px;
+  height: auto;
   display: inline-block;
   margin-left: 100px;
+  margin-bottom: 400px;
 }
 
 .text_1 {
+  font-family: Inter, sans-serif;
   position: absolute;
   bottom: 20px;
   left: 0;
-  margin-left: 20px; /* 예시로 20px로 수정 */
+  margin-left: 20px;
   transform: translate(0, 0);
   color: white;
   font-size: 45px;
   font-weight: 700;
   width: 70%;
   text-align: left;
-  line-height: 1.2; /* 줄 간격 조정 */
-  padding-bottom: 30px; /* 하단에 여백 추가 */
+  line-height: 1.2;
+  padding-bottom: 30px;
 }
 
 .introduce {
   position: absolute;
   margin-left: 100px;
-  font-family: 'Namugothic'; /* 따옴표로 감싸주세요 */
-  font-size: 30px; /* 단위가 누락되어 있습니다. px를 추가해주세요 */
-  font-weight: 700; /* 대소문자가 잘못되었습니다. */
-  text-align: left; /* 'left' 대신 left를 사용해주세요 */
-  color: #00d8ff; /* 따옴표를 제거해주세요 */
-}
-.back {
-  margin-bottom: 400px; /* 예시로 20px 추가 */
+  font-family: 'Namugothic', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: left;
+  color: #00d8ff;
 }
 
-@media (max-width: 1024px) {
+/*아이패드 에어4 = 820px*/
+
+@media (max-width: 820px) {
   .back {
-    margin-left: 0;
-    max-width: 100%;
+    margin-left: -2000px;
+    width: 600px;
   }
 
   .text_1 {
-    font-size: 5vw; /* 아이패드 크기에 맞게 글꼴 크기 조정 */
-    width: 80%;
+    font-size: 3.5vw; /* 아이패드 에어에 맞게 글꼴 크기 조정 */
+    width: 85%;
   }
 
   .introduce {
-    font-size: 4vw; /* 아이패드 크기에 맞게 글꼴 크기 조정 */
-    margin-left: 10px; /* 작은 화면에서 여백 줄이기 */
-  }
-}
-
-@media (max-width: 768px) {
-  .back {
-    margin-left: 0;
-    max-width: 100%;
-  }
-
-  .text_1 {
-    font-size: 6vw; /* 아이폰 크기에 맞게 글꼴 크기 조정 */
-    width: 90%;
-  }
-
-  .introduce {
-    font-size: 5vw; /* 아이폰 크기에 맞게 글꼴 크기 조정 */
-    margin-left: 5px; /* 작은 화면에서 여백 줄이기 */
-  }
-}
-
-@media (max-width: 480px) {
-  .text_1 {
-    font-size: 7vw; /* 작은 화면에서 더 큰 글꼴 크기 */
-    width: 100%;
-  }
-
-  .introduce {
-    font-size: 6vw; /* 작은 화면에서 더 큰 글꼴 크기 */
-    margin-left: 5px; /* 작은 화면에서 여백 줄이기 */
+    font-size: 2.5vw; /* 아이패드 에어에 맞게 글꼴 크기 조정 */
+    margin-left: 10px;
   }
 }
