@@ -1,3 +1,5 @@
+/*쿼리 조정 완료*/
+
 .Personal-container {
   display: flex;
   margin-left: 200px;
@@ -75,11 +77,78 @@
 }
 
 .record_pause {
-  width: 25px;
-  height: 10px;
+  width: 80px;
+  height: 80px;
   position: absolute; /* 절대 위치로 설정 */
-  bottom: 97px;
+  bottom: 30px;
   left: 280px;
   flex-shrink: 0;
   margin-bottom: 5px;
+}
+
+/* iPad Air 2 (768px x 1024px) */
+@media (max-width: 768px) {
+  .Personal-container {
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .questions h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .next_q_button {
+    width: 60px;
+    height: 60px;
+    bottom: 10px;
+    right: 20px;
+  }
+  .record_button,
+  .recordcheck_button {
+    width: 20px;
+    height: 20px;
+    bottom: 50px;
+  }
+  .record_pause {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    left: 240px;
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .Personal-container {
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+  }
+  .questions h2 {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  .next_q_button {
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    right: 10px;
+  }
+  .record_button,
+  .recordcheck_button {
+    width: 15px;
+    height: 15px;
+    bottom: 30px;
+  }
+  .record_pause {
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    left: 200px;
+  }
 }

@@ -10,6 +10,7 @@ const Interview_Real = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const audioRef = useRef(new Audio());
@@ -121,8 +122,13 @@ const Interview_Real = () => {
 
   const playRecording = () => {
     if (!audioUrl) return;
-    audioRef.current.src = audioUrl;
-    audioRef.current.play();
+    if (isPaused) {
+      audioRef.current.play();
+      setIsPaused(false);
+    } else {
+      audioRef.current.src = audioUrl;
+      audioRef.current.play();
+    }
     setIsPlaying(true);
   };
 
@@ -130,6 +136,11 @@ const Interview_Real = () => {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      setIsPaused(true);
+    } else if (isPaused) {
+      audioRef.current.play();
+      setIsPlaying(true);
+      setIsPaused(false);
     }
   };
 
@@ -157,6 +168,7 @@ const Interview_Real = () => {
                   fill="#00D8FF"
               />
             </svg>
+
             <h2>{question}</h2>
           </div>
           <div className="answer-button" onClick={toggleTextVisibility}>
@@ -172,25 +184,16 @@ const Interview_Real = () => {
                   fill="#00D8FF"
               />
             </svg>
+
           </div>
 
-          {/* 텍스트가 보이면 표시되는 부분 */}
           {isTextVisible && currentAnswer && (
               <div>
-                <p
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Inter',
-                      fontSize: '20px',
-                      fontStyle: 'normal',
-                      fontWeight: 800,
-                      lineHeight: 'normal',
-                    }}
-                >
+                <p style={{ color: '#000', fontFamily: 'Inter', fontSize: '20px', fontStyle: 'normal', fontWeight: 800, lineHeight: 'normal' }}>
                   {currentAnswer.best_answer.split('\n').map((paragraph, index) => (
                       <React.Fragment key={index}>
                         {paragraph}
-                        <br/>
+                        <br />
                       </React.Fragment>
                   ))}
                 </p>
@@ -217,6 +220,8 @@ const Interview_Real = () => {
                     </clipPath>
                   </defs>
                 </svg>
+
+
             ) : (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -230,6 +235,7 @@ const Interview_Real = () => {
                       fill="#00D8FF"
                   />
                 </svg>
+
             )}
           </div>
 
@@ -252,9 +258,10 @@ const Interview_Real = () => {
                   fill="#00D8FF"
               />
             </svg>
+
           </div>
           <div className="record_pause" onClick={pauseRecording}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100" fill="none">
               <g clip-path="url(#clip0_428_2)">
                 <path d="M14.6499 85.35C9.8744 80.7376 6.06529 75.2204 3.44484 69.1202C0.824388 63.02 -0.554923 56.459 -0.612614 49.82C-0.670305 43.1811 0.59478 36.5971 3.10882 30.4523C5.62287 24.3075 9.33552 18.7249 14.0302 14.0302C18.7248 9.33559 24.3074 5.62293 30.4522 3.10889C36.597 0.594841 43.181 -0.670244 49.82 -0.612553C56.4589 -0.554862 63.0199 0.824449 69.1201 3.4449C75.2203 6.06535 80.7376 9.87446 85.3499 14.65C94.4578 24.0801 99.4975 36.7102 99.3836 49.82C99.2697 62.9299 94.0112 75.4705 84.7408 84.7409C75.4704 94.0113 62.9298 99.2697 49.82 99.3837C36.7101 99.4976 24.08 94.4579 14.6499 85.35ZM34.9999 30V70H44.9999V30H34.9999ZM54.9999 30V70H64.9999V30H54.9999Z" fill="#00D8FF"/>
               </g>
@@ -264,6 +271,7 @@ const Interview_Real = () => {
                 </clipPath>
               </defs>
             </svg>
+
           </div>
         </div>
         {currentQuestionIndex < JSON.parse(localStorage.getItem('questions')).length - 1 && (

@@ -1,3 +1,4 @@
+/*쿼리 조정 완료*/
 .signup-container {
   display: flex;
   flex-direction: column;
@@ -81,4 +82,72 @@
 .signup-button_real:hover,
 .signup-input:hover {
   background-color: #00d8ff;
+}
+
+/* iPad Air 2 (768px x 1024px) */
+@media (max-width: 768px) {
+  .signup-container {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+    margin-left: 5px;
+  }
+
+  .text,
+  .password {
+    font-size: 20px;
+  }
+
+  .signup-input {
+    width: 80%;
+    height: 35px;
+    margin-bottom: 20px;
+  }
+
+  .signup-button_real {
+    width: 70px;
+    height: 35px;
+  }
+
+  .under_signup p {
+    font-size: 20px;
+  }
+
+  .signup_svg {
+    margin-right: 5px;
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .signup-container {
+    width: 95%;
+    height: auto;
+    padding: 10px;
+    margin-left: 5px;
+  }
+
+  .text,
+  .password {
+    font-size: 18px;
+  }
+
+  .signup-input {
+    width: 90%;
+    height: 30px;
+    margin-bottom: 15px;
+  }
+
+  .signup-button_real {
+    width: 65px;
+    height: 30px;
+  }
+
+  .under_signup p {
+    font-size: 18px;
+  }
+
+  .signup_svg {
+    margin-right: 5px;
+  }
 }

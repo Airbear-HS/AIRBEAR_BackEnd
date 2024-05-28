@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .workout-container {
   display: flex;
   flex-direction: column;
@@ -34,15 +37,26 @@
   margin-bottom: 20px; /* 이미지 아래 여백 */
 }
 
-/* 반응형 디자인을 위한 미디어 쿼리 */
+/* iPad Air 2 (768px x 1024px) */
 @media (max-width: 768px) {
   .workout_1 h2, .workout_2 h2, .workout_3 h2, .workout_4 h2 {
-    font-size: 30px; /* 폰트 크기 조정 */
+    font-size: 30px; /* iPad Air 2 화면에서의 폰트 크기 */
   }
 
   .workoutone img, .workouttwo img, .workoutthree img, .workoutfour img {
-    width: 90%; /* 너비를 조정하여 태블릿에 맞춤 */
-    height: auto; /* 높이를 자동으로 조정 */
-    margin-bottom: 30px; /* 아래 여백 조정 */
+    width: 300px; /* iPad Air 2 화면에서의 이미지 크기 */
+    height: auto; /* 높이 자동 조정 */
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .workout_1 h2, .workout_2 h2, .workout_3 h2, .workout_4 h2 {
+    font-size: 20px; /* iPhone 13 화면에서의 폰트 크기 */
+  }
+
+  .workoutone img, .workouttwo img, .workoutthree img, .workoutfour img {
+    width: 200px; /* iPhone 13 화면에서의 이미지 크기 */
+    height: auto; /* 높이 자동 조정 */
   }
 }

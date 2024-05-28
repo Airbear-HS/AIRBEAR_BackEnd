@@ -1,3 +1,5 @@
+/*쿼리 조정*/
+
 .tips_2,
 .tips_3 {
   margin-left: 100px;
@@ -53,4 +55,50 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0px;
   margin-bottom: 50px;
+}
+
+/* iPad Air 2 (768px x 1024px) */
+@media (max-width: 768px) {
+  .tips_2,
+  .tips_3 {
+    margin-left: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .second_tip,
+  .third_tip {
+    width: 90%;
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .first_tip_text {
+    font-size: 16px;
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .tips_2,
+  .tips_3 {
+    margin-left: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .second_tip,
+  .third_tip {
+    width: 95%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .first_tip_text {
+    font-size: 14px;
+  }
 }

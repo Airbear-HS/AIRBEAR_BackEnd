@@ -1,3 +1,5 @@
+/*쿼리 조정*/
+
 .under_Success p {
   color: #00d8ff;
   text-align: center;
@@ -6,4 +8,18 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+/* iPad Air 2 (768px x 1024px) */
+@media (max-width: 768px) {
+  .under_Success p {
+    font-size: 20px; /* iPad Air 2 화면에서의 폰트 크기 조정 */
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .under_Success p {
+    font-size: 18px; /* iPhone 13 화면에서의 폰트 크기 조정 */
+  }
 }

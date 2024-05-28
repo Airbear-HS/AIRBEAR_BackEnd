@@ -1,3 +1,6 @@
+/*쿼리 조정 완료*/
+
+
 .items_Tech {
   display: flex;
   flex-direction: column;
@@ -33,4 +36,44 @@
   font-weight: 800;
   line-height: normal;
   white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+}
+
+/* iPad Air 2 (768px x 1024px) */
+@media (max-width: 768px) {
+  .item_tech {
+    gap: 15px; /* iPad Air 2 화면에서의 아이템 간격 */
+    margin-bottom: 15px; /* iPad Air 2 화면에서의 아이템 간격 */
+  }
+
+  .item_tech svg {
+    width: 50px; /* iPad Air 2 화면에서의 아이콘 크기 */
+  }
+
+  .item_tech img {
+    width: 30px; /* iPad Air 2 화면에서의 아이콘 크기 */
+  }
+
+  .item_tech p {
+    font-size: 20px; /* iPad Air 2 화면에서의 폰트 크기 */
+  }
+}
+
+/* iPhone 13 (390px x 844px) */
+@media (max-width: 390px) {
+  .item_tech {
+    gap: 10px; /* iPhone 13 화면에서의 아이템 간격 */
+    margin-bottom: 10px; /* iPhone 13 화면에서의 아이템 간격 */
+  }
+
+  .item_tech svg {
+    width: 40px; /* iPhone 13 화면에서의 아이콘 크기 */
+  }
+
+  .item_tech img {
+    width: 25px; /* iPhone 13 화면에서의 아이콘 크기 */
+  }
+
+  .item_tech p {
+    font-size: 18px; /* iPhone 13 화면에서의 폰트 크기 */
+  }
 }
