@@ -5,15 +5,10 @@ AIRBEAR와 함께 쉽고 빠르게 승무원의 꿈을 이루세요!🐻‍❄�
 
 #Home화면
 
-![KakaoTalk_20240530_232005778_01](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/247c9cfe-789c-4c45-8b47-21c7deb00a04)
-
-
-#AIRBEAR에 가입하세요
-
 언제 어디서나 손쉽게 가입하고 플랫폼에 접속할 수 있습니다.
 모바일 친화적인 웹사이트를 통해 이동 중에도 면접 스킬을 연습하세요.🏃‍♂️
 
-![KakaoTalk_20240530_232005778_03](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/8186d42b-e66f-40b2-8212-714410856dc7)
+![KakaoTalk_20240530_232005778_01](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/247c9cfe-789c-4c45-8b47-21c7deb00a04)
 
 
 #My Page에서 개인 맞춤형 학습
@@ -28,6 +23,9 @@ AIRBEAR와 함께 쉽고 빠르게 승무원의 꿈을 이루세요!🐻‍❄�
 
 주요 항공사에서 실제로 사용하는 면접 질문을 연습하세요.
 함께 제공되는 모범 답변을 통해 자신의 약점을 보완하고 강점을 극대화할 수 있습니다.
+![KakaoTalk_20240530_232005778_10](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/5a926c30-d24f-414b-bdf4-e1c9df411693)
+
+
 ![KakaoTalk_20240530_232005778_11](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/a31818d3-be2b-47aa-b0eb-ee92b93cf745)
 
 ![KakaoTalk_20240530_232005778_12](https://github.com/Airbear-HS/AIRBEAR_BackEnd/assets/143497860/df6d1b4b-c218-43e1-973f-aafe7733af15)
